@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, Switch, useHistory } from "react-router-dom";
 import Main  from "../Main/Main";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
          {/*  <Main></Main> */}
         </Route>
       </Switch>
+      <Footer></Footer>
     </div>
   );
 }
