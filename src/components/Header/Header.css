@@ -1,15 +1,9 @@
 .header {
   display: flex;
-  padding: 18px 70px;
+  padding-top: 18px;
   justify-content: space-between;
-  margin: 0 auto;
-  align-items: center;
-}
 
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 18px 14px;
-  }
+  align-items: center;
 }
 
 .header__logo {

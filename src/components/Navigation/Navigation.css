@@ -11,13 +11,13 @@
 }
 
 .link__navigation {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 18px;
-  }
-  
-  .link__navigation_save-films {
-    font-weight: normal;
-    margin-left: 16px;
-  }
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.link__navigation_save-films {
+  font-weight: normal;
+  margin-left: 16px;
+}

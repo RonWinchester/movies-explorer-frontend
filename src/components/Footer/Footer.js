@@ -1,18 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="alignment footer">
       <p className="footer__copyright">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__information">
         <p className="footer__date">© {new Date().getFullYear()}</p>
         <ul className="footer__navigation">
-            <li className='link footer__navigation-item'>Яндекс.Практикум</li>
-            <li className='link footer__navigation-item'>Github</li>
-            <li className='link footer__navigation-item'>Facebook</li>
+          <li className="footer__navigation-item"><a href='https://practicum.yandex.ru' className='link'>Яндекс.Практикум</a></li>
+          <li className="footer__navigation-item"><a href='https://github.com/RonWinchester' className='link'>Github</a></li>
+          <li className="footer__navigation-item"><a href='https://www.facebook.com/roma.polugrudov' className='link'>Facebook</a></li>
         </ul>
       </div>
     </footer>

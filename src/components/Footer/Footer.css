@@ -2,9 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  padding: 18px 70px;
+  padding-top: 18px;
   justify-content: flex-end;
-  margin: 0 auto;
   align-items: center;
   height: 172px;
   box-sizing: border-box;
@@ -19,7 +18,7 @@
     font-size: 12px;
     line-height: 15px;
     flex-wrap:nowrap;
-    padding: 10px 10px;
+    padding-top: 10px;
   }
 }
 

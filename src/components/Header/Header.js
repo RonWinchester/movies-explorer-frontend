@@ -6,7 +6,7 @@ import BurgerButton from "./BurgerButton/BurgerButton";
 
 function Header({ loggedIn }) {
   return (
-    <header className="header">
+    <header className="alignment header">
       <Link to="/">
         <img src={logo} alt="логотип" className="header__logo"></img>
       </Link>

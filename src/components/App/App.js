@@ -10,7 +10,7 @@ function App() {
       <Header></Header>
       <Switch>
         <Route>
-         {/*  <Main></Main> */}
+         <Main></Main>
         </Route>
       </Switch>
       <Footer></Footer>

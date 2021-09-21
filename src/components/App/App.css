@@ -17,6 +17,26 @@
   box-sizing: border-box;
 }
 
+.wrapper {
+  padding: 0 70px;
+}
+
+.alignment {
+  margin: 0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .alignment {
+    margin: 0 20px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .alignment {
+    margin: 0 14px;
+  }
+}
+
 .link {
   text-decoration: none;
   color: white;
