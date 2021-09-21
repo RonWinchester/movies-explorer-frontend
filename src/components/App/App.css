@@ -18,16 +18,28 @@
 }
 
 .wrapper {
-  padding: 0 70px;
+  margin: 0 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin: 0 20px;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .wrapper {
+    margin: 0 14px;
+  }
 }
 
 .alignment {
   margin: 0 70px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 778px) {
   .alignment {
-    margin: 0 20px;
+    margin: 0 30px;
   }
 }
 
@@ -41,11 +53,11 @@
   text-decoration: none;
   color: white;
   cursor: pointer;
-  transition: opacity .3s linear .1s;
+  transition: opacity 0.3s linear 0.1s;
 }
 
 .link:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .button {
@@ -53,9 +65,9 @@
   padding: 0;
   cursor: pointer;
   border: none;
-  transition: opacity .3s linear .1s;
+  transition: opacity 0.3s linear 0.1s;
 }
 
 .button:hover {
-  opacity: .8;
+  opacity: 0.8;
 }

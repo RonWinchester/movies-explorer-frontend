@@ -3,7 +3,7 @@ import NavTab from "../NavTab/NavTab";
 
 function Promo() {
   return (
-    <div className="alignment promo">
+    <div className="wrapper promo">
       <h1 className="promo__title">
         Учебный проект студента факультета Веб-разработки.
       </h1>
