@@ -3,7 +3,7 @@ import React from "react";
 function AboutProject() {
   return (
     <div className="alignment about-project">
-      <h2 className="about-project__title">О проекте</h2>
+      <h2 className="about-project__title border-bottom" id='about'>О проекте</h2>
       <div className="about-project__information">
         <div className="about-project__stages">
           <h3 className="about-project__stages-title">

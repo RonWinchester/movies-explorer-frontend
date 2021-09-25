@@ -1,13 +1,17 @@
 import React from "react";
 
-function NavTab () {
-    return(
-        <ul className='navTab'>
-            <li className="navTab__item"><a href='#about' className='link'>О проекте</a></li>
-            <li className="navTab__item"><a href='#stack' className='link'>Технологии</a></li>
-            <li className="navTab__item"><a href='#about-me' className='link'>Студент</a></li>
-        </ul>
-    )
+function NavTab(props) {
+  return (
+    <ul className={`navTab ${props.navTab}`}>
+      {props.elements.map((element, index) => (
+        <li className={`navTab__item ${props.navTab__item}`} key={index}>
+          <a href={element.link} className="link" target="_blank" rel="noreferrer" >
+            {element.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
-export default NavTab
+export default NavTab;
