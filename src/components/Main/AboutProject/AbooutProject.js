@@ -1,9 +1,10 @@
 import React from "react";
+import BlockName from "../BlockName/BlockName";
 
 function AboutProject() {
   return (
     <div className="alignment about-project">
-      <h2 className="about-project__title border-bottom" id='about'>О проекте</h2>
+      <BlockName name="О проекте" id="about" />
       <div className="about-project__information">
         <div className="about-project__stages">
           <h3 className="about-project__stages-title">

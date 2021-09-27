@@ -1,13 +1,12 @@
 import React from "react";
 import NavTab from "../NavTab/NavTab";
 import { techsButton } from "../../../constants/constants";
+import BlockName from "../BlockName/BlockName";
 
 function Techs() {
   return (
     <div className="techs">
-      <h2 className="border-bottom techs__title" id="stack">
-        Технологии
-      </h2>
+      <BlockName name='Технологии' id='stack' />
       <div className="techs-information">
         <h3 className="techs-information__title">7 технологий</h3>
         <p className='techs-information__description'>

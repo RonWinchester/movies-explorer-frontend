@@ -1,0 +1,147 @@
+.AboutMe {
+  display: flex;
+  flex-direction: column;
+  margin-top: 110px;
+  margin-bottom: 125px;
+  box-sizing: border-box;
+}
+
+.AboutMe-block {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+}
+
+.AboutMe-information {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.AboutMe-avatar {
+  max-width: 270px;
+}
+
+.AboutMe-avatar__image {
+  object-fit: cover;
+}
+
+.AboutMe-information__title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0;
+}
+
+.AboutMe-information__subtitle {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.AboutMe-information__description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  margin-top: 26px;
+}
+
+.AboutMe-information__pages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  margin-top: auto;
+}
+
+.AboutMe-information__page {
+  margin-right: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.AboutMe-information__page:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 992px) {
+  .AboutMe {
+    margin-top: 90px;
+    margin-bottom: 90px;
+  }
+
+  .AboutMe-information {
+    max-width: 364px;
+  }
+
+  .AboutMe-information__title {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .AboutMe-information__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .AboutMe-information__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .AboutMe {
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+
+  .AboutMe-block {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+  }
+
+  .AboutMe-avatar {
+    order: -1;
+    width: 292px;
+    max-width: 100%;
+  }
+
+  .AboutMe-avatar__image {
+    width: 100%;
+  }
+
+  .AboutMe-information {
+    max-width: 100%;
+    margin-top: 40px;
+    margin-right: 0;
+  }
+
+  .AboutMe-information__title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .AboutMe-information__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 20px;
+  }
+
+  .AboutMe-information__description {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 20px;
+  }
+
+  .AboutMe-information__pages {
+    margin-top: 40px;
+  }
+}

@@ -4,19 +4,9 @@
   position: relative;
   margin-top: 120px;
   box-sizing: border-box;
-  /* height: 625px; */
   background-color: #272727;
   width: 100%;
   padding: 100px 70px;
-}
-
-.techs__title {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 27px;
-  padding-bottom: 23px;
-  margin: 0;
 }
 
 .techs-information {
@@ -48,9 +38,9 @@
   text-align: center;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 992px) {
   .techs {
-      padding: 90px 50px;
+    padding: 90px 50px;
   }
 
   .techs-information__description {
@@ -64,7 +54,7 @@
   }
 }
 
-@media screen and (max-width: 525px) {
+@media screen and (max-width: 576px) {
   .techs-information__title {
     font-size: 30px;
     line-height: 36px;

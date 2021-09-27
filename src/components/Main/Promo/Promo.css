@@ -11,18 +11,6 @@
   margin-top: 38px;
 }
 
-@media screen and (max-width: 768px) {
-  .promo {
-    height: 843px;
-  }
-}
-
-@media screen and (max-width: 525px) {
-  .promo {
-    height: 586px;
-  }
-}
-
 .promo__title {
   font-style: normal;
   font-weight: normal;
@@ -33,16 +21,24 @@
   margin: 0 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
+  .promo {
+    height: 843px;
+  }
+
   .promo__title {
     font-size: 40px;
     line-height: 52px;
   }
 }
 
-@media screen and (max-width: 525px) {
+@media screen and (max-width: 576px) {
   .promo__title {
     font-size: 29px;
     line-height: 37px;
+  }
+
+  .promo {
+    height: 586px;
   }
 }

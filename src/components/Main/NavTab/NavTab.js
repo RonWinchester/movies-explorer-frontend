@@ -5,7 +5,7 @@ function NavTab(props) {
     <ul className={`navTab ${props.navTab}`}>
       {props.elements.map((element, index) => (
         <li className={`navTab__item ${props.navTab__item}`} key={index}>
-          <a href={element.link} className="link" target="_blank" rel="noreferrer" >
+          <a href={element.link} className="link" target={element.target} rel="noreferrer" >
             {element.name}
           </a>
         </li>
