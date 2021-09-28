@@ -10,7 +10,7 @@ function Header({ loggedIn }) {
       <Link to="/">
         <img src={logo} alt="логотип" className="header__logo"></img>
       </Link>
-      {!loggedIn ? (
+      {loggedIn ? (
         <>
           <Navigation></Navigation>
           <Link

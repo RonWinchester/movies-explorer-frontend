@@ -1,4 +1,4 @@
-.BlockName {
+.block-name {
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -10,7 +10,7 @@
 
 
 @media screen and (max-width: 576px) {
-  .BlockName {
+  .block-name {
     font-size: 18px;
     line-height: 22px;
     padding-bottom: 28px;

@@ -6,23 +6,23 @@ import Porfolio from "../Portfolio/Portfolio";
 
 function AboutMe() {
   return (
-    <div className="alignment AboutMe">
+    <div className="alignment about-me">
       <BlockName name="Студент" id="about-me" />
-      <div className="AboutMe-block">
-        <div className="AboutMe-information">
-          <h3 className="AboutMe-information__title">Виталий</h3>
-          <h4 className="AboutMe-information__subtitle">
+      <div className="about-me-block">
+        <div className="about-me-information">
+          <h3 className="about-me-information__title">Виталий</h3>
+          <h4 className="about-me-information__subtitle">
             Фронтенд-разработчик, 30 лет
           </h4>
-          <p className="AboutMe-information__description">
+          <p className="about-me-information__description">
             Я родился и живу в Саратове, закончил факультет экономики СГУ. У
             меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
             бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
             Контур». После того, как прошёл курс по веб-разработке, начал
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <ul className="AboutMe-information__pages">
-            <li className="AboutMe-information__page">
+          <ul className="about-me-information__pages">
+            <li className="about-me-information__page">
               <a
                 className="link"
                 href="https://www.facebook.com/roma.polugrudov/"
@@ -32,7 +32,7 @@ function AboutMe() {
                 Facebook
               </a>
             </li>
-            <li className="link AboutMe-information__page">
+            <li className="link about-me-information__page">
               <a
                 className="link"
                 href="https://github.com/RonWinchester"
@@ -44,8 +44,8 @@ function AboutMe() {
             </li>
           </ul>
         </div>
-        <div className="AboutMe-avatar">
-          <img className="AboutMe-avatar__image" src={avatar} alt="аватар" />
+        <div className="about-me-avatar">
+          <img className="about-me-avatar__image" src={avatar} alt="аватар" />
         </div>
       </div>
       <div>
