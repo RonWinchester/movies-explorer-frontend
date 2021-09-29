@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -19,9 +20,7 @@ function App() {
           <Footer></Footer>
         </Route>
         <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} />
-        {/* <Route path="/movies">
-        {!loggedIn ? <Redirect to="/" /> : <Movies />}
-        </Route> */}
+        <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} component={SavedMovies} />
       </Switch>
     </div>
   );

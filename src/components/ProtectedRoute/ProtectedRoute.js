@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
       {() =>
         props.loggedIn ? (
           <>
-            <Header></Header>
+            <Header loggedIn={props.loggedIn}></Header>
             <Component {...props} />
             <Footer></Footer>
           </>

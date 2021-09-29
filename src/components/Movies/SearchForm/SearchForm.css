@@ -19,8 +19,8 @@
 }
 
 .search-form__fieldset:last-of-type {
-    border: 0;
-    margin: 0;
+  border: 0;
+  margin: 0;
 }
 
 .search-form__label {
@@ -43,11 +43,11 @@
 }
 
 .search-form__input:hover {
-  border-left: 1px solid #424242;
+  opacity: 0.8;
 }
 
 .search-form__button {
-  width: 34px;
+  width: 38px;
   height: 34px;
   background-color: transparent;
   border: none;
@@ -62,4 +62,22 @@
 
 .search-form__button:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 992px) {
+  .search-form {
+    margin: 80px 0 60px 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .search-form {
+    margin: 84px 0 50px 0;
+  }
+
+  .search-form__input {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 9px 0;
+  }
 }
