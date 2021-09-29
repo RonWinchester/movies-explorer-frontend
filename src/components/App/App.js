@@ -8,6 +8,8 @@ import Movies from "../Movies/Movies";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import { cards } from "../../constants/constants";
+import NoFilms from "../NoFilms/NoFilms";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -20,8 +22,19 @@ function App() {
           <Main></Main>
           <Footer></Footer>
         </Route>
-        <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} cards={cards}/>
-        <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} component={SavedMovies} cards={cards}/>
+        <ProtectedRoute
+          path="/movies"
+          loggedIn={loggedIn}
+          component={Movies}
+          cards={cards}
+        />
+        <ProtectedRoute
+          path="/saved-movies"
+          loggedIn={loggedIn}
+          component={SavedMovies}
+          cards={cards}
+        />
+        <NotFound path="*" />
       </Switch>
     </div>
   );
