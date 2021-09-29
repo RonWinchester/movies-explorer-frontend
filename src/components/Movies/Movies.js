@@ -1,13 +1,15 @@
 import React from "react";
+import NoFilms from "../NoFilms/NoFilms";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "./SearchForm/SearchForm";
-import { cards } from "../../constants/constants";
 
 function Movies(props) {
+  const { cards } = props;
+
   return (
     <main className="alignment">
       <SearchForm></SearchForm>
-      <MoviesCardList cards={cards}></MoviesCardList>
+      {cards ? <MoviesCardList cards={cards}></MoviesCardList> : <NoFilms title='Нет загруженных фильмов'/>}
     </main>
   );
 }

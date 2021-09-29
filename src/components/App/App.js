@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import { cards } from "../../constants/constants";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -19,8 +20,8 @@ function App() {
           <Main></Main>
           <Footer></Footer>
         </Route>
-        <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} />
-        <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} component={SavedMovies} />
+        <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} cards={cards}/>
+        <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} component={SavedMovies} cards={cards}/>
       </Switch>
     </div>
   );
