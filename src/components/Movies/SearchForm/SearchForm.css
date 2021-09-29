@@ -4,7 +4,7 @@
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  margin: 70px 0 47px 0;
+  margin: 50px 0 47px 0;
 }
 
 .search-form__fieldset {
@@ -66,13 +66,13 @@
 
 @media screen and (max-width: 992px) {
   .search-form {
-    margin: 80px 0 60px 0;
+    margin: 60px 0 60px 0;
   }
 }
 
 @media screen and (max-width: 576px) {
   .search-form {
-    margin: 84px 0 50px 0;
+    margin: 64px 0 50px 0;
   }
 
   .search-form__input {

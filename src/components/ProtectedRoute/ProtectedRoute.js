@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
           <>
             <Header loggedIn={props.loggedIn}></Header>
             <Component {...props} />
-            <Footer></Footer>
+            {!props.noFooter &&<Footer></Footer>}
           </>
         ) : (
           <Redirect to="/" />
