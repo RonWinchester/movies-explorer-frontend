@@ -21,7 +21,7 @@
   text-align: center;
   color: #ffffff;
   margin-top: 50px;
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
 }
 
 .button-login {
@@ -40,22 +40,10 @@
   margin-top: 179px;
 }
 
-/* .button_login {
-  background: #4285f4;
-  border-radius: 3px;
-  height: 45px;
-  color: #ffffff;
-  margin-top: 69px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-} */
-
 @media screen and (max-width: 992px) {
   .button_more {
     margin-top: 61px;
-    margin-bottom: 89px;
+    /* margin-bottom: 89px; */
   }
 }
 

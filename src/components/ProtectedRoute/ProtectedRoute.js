@@ -8,11 +8,11 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
     <Route>
       {() =>
         props.loggedIn ? (
-          <>
+          <div className='protected-route-wrapper'>
             <Header loggedIn={props.loggedIn}></Header>
             <Component {...props} />
             {!props.noFooter &&<Footer></Footer>}
-          </>
+          </div>
         ) : (
           <Redirect to="/" />
         )

@@ -14,7 +14,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   return (
     <div className="page__container">
