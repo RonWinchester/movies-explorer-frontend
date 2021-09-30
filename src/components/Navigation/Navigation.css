@@ -22,3 +22,29 @@
   font-weight: normal;
   margin-left: 16px;
 }
+
+.navigation_isopen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.link__navigation_menue {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.link__navigation_bottom {
+  margin-top: 28px;
+  border-bottom: 2px solid white;
+  margin-bottom: 22px;
+}
+
+
+.link__navigation_margin {
+  margin-top: calc(100vh - 350px);
+}

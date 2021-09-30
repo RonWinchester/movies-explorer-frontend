@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -10,6 +10,8 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import { cards } from "../../constants/constants";
 import NotFound from "../NotFound/NotFound";
 import Profile from "../Profile/Profile";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
@@ -38,9 +40,17 @@ function App() {
           path="/profile"
           loggedIn={loggedIn}
           component={Profile}
-          noFooter = {true}
+          noFooter={true}
         />
-        <NotFound path="*" />
+        <Route path="/signin">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Register />
+        </Route>
+        <Route path="*">
+          <NotFound  />
+        </Route>
       </Switch>
     </div>
   );

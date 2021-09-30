@@ -1,5 +1,5 @@
 import React from "react";
-import MoreButton from "../../MoreButton/MoreButton";
+import Button from "../../Button/Button";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
@@ -17,7 +17,7 @@ function MoviesCardList(props) {
           />
         ))}
       </ul>
-      {cards.length > 9 && <MoreButton></MoreButton>}
+      {cards.length > 9 && <Button selector="button_more" name='Еще'></Button>}
     </>
   );
 }

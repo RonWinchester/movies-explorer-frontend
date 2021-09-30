@@ -13,78 +13,78 @@ import img12 from "../images/cards-pic/img12.png";
 
 export const cards = [
   {
-    image:img1,
-    title:'33 слова о дизайне',
-    time:'1ч 47м',
+    image: img1,
+    title: "33 слова о дизайне",
+    time: "1ч 47м",
     like: true,
   },
   {
-    image:img2,
-    title:'Киноальманах «100 лет дизайна»',
-    time:'1ч 3м',
+    image: img2,
+    title: "Киноальманах «100 лет дизайна»",
+    time: "1ч 3м",
     like: false,
   },
   {
-    image:img3,
-    title:'В погоне за Бенкси',
-    time:'1ч 42м',
+    image: img3,
+    title: "В погоне за Бенкси",
+    time: "1ч 42м",
     like: false,
   },
   {
-    image:img4,
-    title:'Баския: Взрыв реальности',
-    time:'1ч 21м',
+    image: img4,
+    title: "Баския: Взрыв реальности",
+    time: "1ч 21м",
     like: false,
   },
   {
-    image:img5,
-    title:'Бег это свобода',
-    time:'1ч 44м',
+    image: img5,
+    title: "Бег это свобода",
+    time: "1ч 44м",
     like: false,
   },
   {
-    image:img6,
-    title:'Книготорговцы',
-    time:'1ч 37м',
+    image: img6,
+    title: "Книготорговцы",
+    time: "1ч 37м",
     like: true,
   },
   {
-    image:img7,
-    title:'Когда я думаю о Германии ночью',
-    time:'1ч 56м',
+    image: img7,
+    title: "Когда я думаю о Германии ночью",
+    time: "1ч 56м",
     like: false,
   },
   {
-    image:img8,
-    title:'Gimme Danger: История Игги и The Stooge...',
-    time:'1ч 59м',
+    image: img8,
+    title: "Gimme Danger: История Игги и The Stooge...",
+    time: "1ч 59м",
     like: false,
   },
   {
-    image:img9,
-    title:'Дженис: Маленькая девочка грустит',
-    time:'1ч 42м',
+    image: img9,
+    title: "Дженис: Маленькая девочка грустит",
+    time: "1ч 42м",
     like: true,
   },
   {
-    image:img10,
-    title:'Соберись перед прыжком',
-    time:'1ч 10м',
+    image: img10,
+    title: "Соберись перед прыжком",
+    time: "1ч 10м",
     like: true,
   },
   {
-    image:img11,
-    title:'Пи Джей Харви: A dog called money',
-    time:'1ч 4м',
+    image: img11,
+    title: "Пи Джей Харви: A dog called money",
+    time: "1ч 4м",
     like: false,
   },
   {
-    image:img12,
-    title:'По волнам: Искусство звука в кино',
-    time:'1ч 7м',
+    image: img12,
+    title: "По волнам: Искусство звука в кино",
+    time: "1ч 7м",
     like: false,
   },
-]
+];
 
 export const promoButton = [
   {
@@ -157,5 +157,69 @@ export const portfolioUrls = [
     name: "Одностраничное приложение",
     link: "https://polugrudov.students.nomoredomains.club/",
     target: "_blank",
+  },
+];
+
+export const registerData = {
+  name: "Зарегистрироваться",
+  title: "Добро пожаловать!",
+  description: "Уже зарегистрированы?",
+  link: "/signin",
+  linkName: "Войти",
+};
+
+export const loginData = {
+  name: "Войти",
+  title: "Рады видеть!",
+  description: "Ещё не зарегистрированы?",
+  link: "/signup",
+  linkName: "Регистрация",
+};
+
+export const regiterInputData = [
+  {
+    FormInputTitle: "Имя",
+    FormInputName: "input-name",
+    FormInputError: "form-name-error",
+    FormInputErrorName: "Что-то пошло не так...",
+    FormInputType: "name",
+    FormInputId: "register-name",
+  },
+  {
+    FormInputTitle: "E-mail",
+    FormInputName: "input-email",
+    FormInputError: "form-email-error",
+    FormInputErrorName: "Пользователь с таким e-mail уже существует",
+    FormInputType: "email",
+    FormInputId: "register-email",
+  },
+  {
+    FormInputTitle: "Пароль",
+    FormInputName: "input-password",
+    FormInputError: "form-password-error",
+    FormInputErrorName: "Что-то пошло не так...",
+    FormInputType: "password",
+    FormInputId: "register-password",
+    PasswordInput:'form-input_red'
+  },
+];
+
+export const loginInputData = [
+  {
+    FormInputTitle: "E-mail",
+    FormInputName: "input-email",
+    FormInputError: "form-email-error",
+    FormInputErrorName: "Пользователь с таким e-mail уже существует",
+    FormInputType: "email",
+    FormInputId: "register-email",
+  },
+  {
+    FormInputTitle: "Пароль",
+    FormInputName: "input-password",
+    FormInputError: "form-password-error",
+    FormInputErrorName: "Что-то пошло не так...",
+    FormInputType: "password",
+    FormInputId: "register-password",
+    PasswordInput:'form-input_red'
   },
 ];

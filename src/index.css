@@ -17,10 +17,19 @@
 @import url(../src/components/Checkbox/Checkbox.css);
 @import url(../src/components/Movies/MoviesCardList/MoviesCardList.css);
 @import url(../src/components/Movies/MoviesCard/MoviesCard.css);
-@import url(../src/components/MoreButton/MoreButton.css);
+@import url(../src/components/Button/Button.css);
 @import url(../src/components/NoFilms/NoFilms.css);
 @import url(../src/components/NotFound/NotFound.css);
 @import url(../src/components/Profile/Profile.css);
+@import url(../src/components/Form/Form.css);
+@import url(../src/components/FormInput/FormInput.css);
+@import url(../src/components/Register/Register.css);
+@import url(../src/components/Login/Login.css);
+@import url(../src/components/BurgerMenu/BurgerMenu.css);
+
+
+
+
 
 
 

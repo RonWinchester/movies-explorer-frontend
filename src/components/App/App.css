@@ -36,18 +36,6 @@
   opacity: 0.8;
 }
 
-.button {
-  outline: none;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.3s linear 0.1s;
-}
-
-.button:hover {
-  opacity: 0.8;
-}
-
 @media screen and (max-width: 992px) {
   .wrapper {
     margin: 0 20px;

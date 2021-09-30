@@ -1,19 +1,19 @@
 import React from 'react';
 
-function MoreButton({ handleClick }) {
+function Button({ handleClick, selector, name, types }) {
   /* const handleMoreClick =() => {
     handleClick();
   } */
 
   return (
     <button
-      type="button"
-      className="more-button"
+      type={`${types ? types : 'button'}`}
+      className={`button ${selector}`}
       /* onClick={handleMoreClick} */
     >
-      Ещё
+      {name}
     </button>
   );
 }
 
-export default MoreButton;
+export default Button;
