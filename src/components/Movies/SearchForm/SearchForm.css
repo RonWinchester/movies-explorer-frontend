@@ -42,7 +42,15 @@
   cursor: pointer;
 }
 
+.search-form__input_error::placeholder {
+  color: #6e5160;
+}
+
 .search-form__input:hover {
+  opacity: 0.3;
+}
+
+.search-form__input:focus {
   opacity: 0.8;
 }
 

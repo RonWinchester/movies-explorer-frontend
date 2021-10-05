@@ -7,22 +7,22 @@
 .no-films__title {
   font-style: normal;
   font-weight: normal;
-  font-size: 100px;
-  line-height: 169px;
+  font-size: 50px;
+  line-height: 60px;
   text-align: center;
   opacity: .2;
 }
 
 @media screen and (max-width: 992px) {
   .no-films__title {
-    font-size: 70px;
-    line-height: 129px;
+    font-size: 30px;
+    line-height: 40px;
   }
 }
 
 @media screen and (max-width: 576px) {
   .no-films__title {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 20px;
+    line-height: 30px;
   }
 }

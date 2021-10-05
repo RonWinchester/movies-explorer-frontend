@@ -3,17 +3,19 @@ import Button from "../../Button/Button";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
-  const { cards } = props;
+  const { cards, handleLikeClick,like } = props;
   return (
     <>
       <ul className="movies">
         {cards.map((card, index) => (
           <MoviesCard
-            key={index}
-            image={card.image}
-            title={card.title}
-            time={card.time}
-            like={card.like}
+            key={card.id}
+            image={`https://api.nomoreparties.co${card.image.url}`}
+            title={card.nameRU}
+            time={card.duration}
+            like={like}
+            link = {card.trailerLink}
+            handleLikeClick={handleLikeClick}
           />
         ))}
       </ul>

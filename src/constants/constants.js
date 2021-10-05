@@ -223,3 +223,5 @@ export const loginInputData = [
     PasswordInput:'form-input_red'
   },
 ];
+
+export const apiMoviesUrl = 'https://api.nomoreparties.co/beatfilm-movies';
