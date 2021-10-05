@@ -1,0 +1,18 @@
+.block-name {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #dadada;
+}
+
+
+@media screen and (max-width: 576px) {
+  .block-name {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+}

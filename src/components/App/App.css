@@ -1,0 +1,57 @@
+.page {
+  background-color: #202020;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+.page__container {
+  font-family: Inter, Arial, sans-serif;
+  color: white;
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  margin: 0 40px;
+}
+
+.alignment {
+  margin: 0 70px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s linear 0.1s;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 992px) {
+  .wrapper {
+    margin: 0 20px;
+  }
+
+  .alignment {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .alignment {
+    margin: 0 14px;
+  }
+
+  .wrapper {
+    margin: 0 14px;
+  }
+}

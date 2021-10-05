@@ -1,0 +1,23 @@
+.movies {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, 364px);
+  gap: 37px 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  .movies {
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, 339px);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .movies {
+    grid-template-columns: repeat(auto-fit, 300px);
+  }
+}

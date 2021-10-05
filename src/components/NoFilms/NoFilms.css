@@ -1,0 +1,28 @@
+.no-films {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-films__title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100px;
+  line-height: 169px;
+  text-align: center;
+  opacity: .2;
+}
+
+@media screen and (max-width: 992px) {
+  .no-films__title {
+    font-size: 70px;
+    line-height: 129px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .no-films__title {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}

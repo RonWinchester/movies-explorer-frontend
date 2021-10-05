@@ -1,0 +1,18 @@
+.button__burger {
+  width: 24px;
+  height: 18px;
+  background-image: url("../../../../src/images/Group5.svg");
+  background-color: transparent;
+  background-position: center;
+  background-size: contain;
+  background-repeat: repeat-y;
+  align-self: center;
+  display: none;
+}
+
+
+@media screen and (max-width: 992px) {
+  .button__burger {
+    display: block;
+  }
+}
