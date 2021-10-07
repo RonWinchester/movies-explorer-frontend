@@ -1,14 +1,14 @@
-import { apiMoviesUrl } from "../constants/constants";
+import { apiMoviesUrl, getResponseData } from "../constants/constants";
 
-function getResponseData(res) {
+/* function getResponseData(res) {
   return res.ok ? res.json() : Promise.reject(`${res.status}`);
-}
+} */
 
 export function getMovies() {
   return fetch(`${apiMoviesUrl}`, {
     method: "GET",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
   }).then((res) => {

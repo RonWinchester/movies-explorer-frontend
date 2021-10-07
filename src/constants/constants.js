@@ -137,6 +137,11 @@ export const loginInputData = [
 ];
 
 export const apiMoviesUrl = 'https://api.nomoreparties.co/beatfilm-movies';
+export const apiMainUrl ='https://api.polugrudov.nomoredomains.club/';
+
+export function getResponseData(res) {
+  return res.ok ? res.json() : Promise.reject(`${res.status}`);
+}
 
 export const LARGE_SCREEN = 1280;
 export const MEDIUM_SCREEN = 768;

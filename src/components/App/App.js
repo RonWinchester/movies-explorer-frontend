@@ -28,7 +28,7 @@ import { dependentValues } from "../hooks/resizeWindows";
 
 function App() {
   //Авторизация
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   //Отфильтрованные фильмы по названию
   const [movies, setMovies] = React.useState([]);
   //Отфильтрованные фильмы по количеству карточек для разных экранов
@@ -142,7 +142,7 @@ function App() {
   React.useEffect(() => {
     setMovieCards(movieCards);
     setLike(false);
-  }, [like]);
+  }, [like, movieCards]);
 
   return (
     <div className="page__container">
