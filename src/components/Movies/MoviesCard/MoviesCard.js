@@ -1,7 +1,7 @@
 import React from "react";
 
 function MoviesCard(props) {
-  const { image, title, time, like, link, handleLikeClick } = props;
+  const { image, title, time, like, link, handleLikeClick, card } = props;
 
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins / 60);
@@ -9,8 +9,10 @@ function MoviesCard(props) {
     return `${hours}ч  ${minutes}мин`;
   }
 
+  //console.log(handleLikeClick)
+
   function handleLike() {
-    handleLikeClick()
+    handleLikeClick(card)
   }
 
   const duration = getTimeFromMins(time);
@@ -25,7 +27,7 @@ function MoviesCard(props) {
         </h2>
         <button
           className={`movies-card__button ${
-            like && "movies-card__button_active"
+            card.like && "movies-card__button_active"
           } `}
           type="button" onClick={handleLike}
         ></button>

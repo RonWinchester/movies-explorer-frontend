@@ -4,7 +4,6 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
   const { cards, handleLikeClick, like, uploadingСards, hiddenButton } = props;
-
   return (
     <>
       <ul className="movies">
@@ -17,6 +16,7 @@ function MoviesCardList(props) {
             like={like}
             link={card.trailerLink}
             handleLikeClick={handleLikeClick}
+            card={card}
           />
         ))}
       </ul>

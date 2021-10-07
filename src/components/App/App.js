@@ -15,7 +15,7 @@ import { getMovies } from "../../utils/MoviesApi";
 import { filterMovies } from "../../utils/filter";
 import { dependentValues } from "../hooks/resizeWindows";
 
-import {
+/* import {
   LARGE_SCREEN,
   MEDIUM_SCREEN,
   MAX_MOVIES,
@@ -24,7 +24,7 @@ import {
   ADD_MAX_MOVIES,
   ADD_MID_MOVIES,
   ADD_MIN_MOVIES,
-} from "../../constants/constants";
+} from "../../constants/constants"; */
 
 function App() {
   //Авторизация
@@ -130,10 +130,19 @@ function App() {
   }
 
   //Переключатель лайка
-  const handleLikeClick = () => {
+  function handleLikeClick(cardLike) {
     setLike(true);
-    console.log("true");
-  };
+    movieCards.map((card) =>
+      card.id === cardLike.id
+        ? (card["like"] = cardLike.like ? false : true)
+        : card
+    );
+  }
+
+  React.useEffect(() => {
+    setMovieCards(movieCards);
+    setLike(false);
+  }, [like]);
 
   return (
     <div className="page__container">
