@@ -1,15 +1,15 @@
 import React from 'react';
 
 function Button({ handleClick, selector, name, types }) {
-  /* const handleMoreClick =() => {
+  const handleMoreClick =() => {
     handleClick();
-  } */
+  }
 
   return (
     <button
       type={`${types ? types : 'button'}`}
       className={`button ${selector}`}
-      /* onClick={handleMoreClick} */
+      onClick={handleMoreClick}
     >
       {name}
     </button>

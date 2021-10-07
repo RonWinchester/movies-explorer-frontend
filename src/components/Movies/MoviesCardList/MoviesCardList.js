@@ -3,7 +3,8 @@ import Button from "../../Button/Button";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
-  const { cards, handleLikeClick,like } = props;
+  const { cards, handleLikeClick, like, uploadingСards, hiddenButton } = props;
+
   return (
     <>
       <ul className="movies">
@@ -14,12 +15,19 @@ function MoviesCardList(props) {
             title={card.nameRU}
             time={card.duration}
             like={like}
-            link = {card.trailerLink}
+            link={card.trailerLink}
             handleLikeClick={handleLikeClick}
           />
         ))}
       </ul>
-      {cards.length > 9 && <Button selector="button_more" name='Еще'></Button>}
+      {!hiddenButton && (
+        <Button
+          selector="button_more"
+          name="Еще"
+          type="button"
+          handleClick={uploadingСards}
+        ></Button>
+      )}
     </>
   );
 }

@@ -5,7 +5,15 @@ import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "./Preloader/Preloader";
 
 function Movies(props) {
-  const { movies, handleRequest, handleLikeClick, like, filmsError } = props;
+  const {
+    movies,
+    handleRequest,
+    handleLikeClick,
+    like,
+    filmsError,
+    uploadingСards,
+    hiddenButton,
+  } = props;
 
   return (
     <main className="alignment">
@@ -19,6 +27,8 @@ function Movies(props) {
               cards={movies}
               handleLikeClick={handleLikeClick}
               like={like}
+              uploadingСards={uploadingСards}
+              hiddenButton={hiddenButton}
             ></MoviesCardList>
           ) : (
             <NoFilms

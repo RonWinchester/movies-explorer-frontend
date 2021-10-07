@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchForm.css";
 import Checkbox from "../../Checkbox/Checkbox";
-import { useLocation } from "react-router-dom";
+/* import { useLocation } from "react-router-dom"; */
 
 function SearchForm({ handleRequest }) {
   const [query, setQuery] = React.useState("");
