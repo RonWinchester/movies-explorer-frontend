@@ -7,12 +7,13 @@ function FormInput({
   FormInputErrorName,
   FormInputType,
   FormInputId,
-  PasswordInput
+  PasswordInput,
+  handleInputValueChange
 }) {
-  const [inputValue, setInputValue] = React.useState("");
+  /* const [inputValue, setInputValue] = React.useState(""); */
 
-  function handleInputValueChange(e) {
-    setInputValue(e.target.value);
+  function handleInputValue(e) {
+    handleInputValueChange(e.target.value);
   }
 
   return (
@@ -24,10 +25,11 @@ function FormInput({
         minLength="3"
         maxLength="50"
         name={FormInputName}
-        onChange={handleInputValueChange}
-        value={inputValue}
+        onChange={handleInputValue}
+        /* value={inputValue} */
         id={FormInputId}
         className={`form-input ${PasswordInput}`}
+        autoComplete='none'
       />
       <span id={FormInputError} className='form-input-error'>{FormInputErrorName}</span>
     </>

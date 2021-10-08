@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, useHistory } from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -14,20 +14,9 @@ import Login from "../Login/Login";
 import { getMovies } from "../../utils/MoviesApi";
 import { filterMovies } from "../../utils/filter";
 import { dependentValues } from "../hooks/resizeWindows";
-
-/* import {
-  LARGE_SCREEN,
-  MEDIUM_SCREEN,
-  MAX_MOVIES,
-  MID_MOVIES,
-  MIN_MOVIES,
-  ADD_MAX_MOVIES,
-  ADD_MID_MOVIES,
-  ADD_MIN_MOVIES,
-} from "../../constants/constants"; */
+import { createUser, login, logout, getUserInfo } from "../../utils/MainApi";
 
 function App() {
-  //Авторизация
   const [loggedIn, setLoggedIn] = React.useState(false);
   //Отфильтрованные фильмы по названию
   const [movies, setMovies] = React.useState([]);
@@ -35,7 +24,7 @@ function App() {
   const [movieCards, setMovieCards] = React.useState([]);
   //Прелоадер
   const [requestProcessing, setRequestProcessing] = React.useState(false);
-  // Лайк
+
   const [like, setLike] = React.useState(false);
   //Ошибка при загрузке фильмов
   const [filmsError, setFilmsError] = React.useState(false);
@@ -49,13 +38,60 @@ function App() {
   const [hiddenButton, sethiddenButton] = React.useState(true);
 
   const location = useLocation();
+  const history = useHistory();
+
+  //Подтягиваем данные
+  React.useEffect(() => {
+    getUserInfo()
+      .then((res) => {
+        console.log(res)
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        console.log(`ошибка авторизации ${err}`);
+      });
+  }, [loggedIn, history]);
+
+  //Регистрация
+  function registration(name, email, password) {
+    createUser({ name, email, password })
+      .then((res) => {
+        history.push("/signin");
+      })
+      .catch((err) => {
+        console.log(`ошибка регистрации ${err}`);
+      });
+  }
+
+  //Авторизация
+  function authorize(email, password) {
+    login({ email, password })
+      .then((res) => {
+        setLoggedIn(true);
+        history.push("/movies");
+      })
+      .catch((err) => {
+        console.log(`ошибка регистрации ${err}`);
+      });
+  }
+
+  //Выход
+  function exit() {
+    logout()
+      .then((res) => {
+        setLoggedIn(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(`ошибка регистрации ${err}`);
+      });
+  }
 
   //Запрос на фильмы
   const handleRequest = (query) => {
     setRequestProcessing(true);
     getMovies()
       .then((response) => {
-        /* setErrorResponce(response.Response); */
         /* setMovies(response); */
         const filterFilms = filterMovies(response, query);
         localStorage.setItem("movies", JSON.stringify(filterFilms));
@@ -69,19 +105,6 @@ function App() {
         setFilmsError(true);
       });
   };
-
-  /*   function dependentValues(sizeWindow) {
-    if (sizeWindow >= LARGE_SCREEN) {
-      setFilmsNumber(MAX_MOVIES);
-      setDownloadableMovies(ADD_MAX_MOVIES);
-    } else if (sizeWindow < LARGE_SCREEN && sizeWindow >= MEDIUM_SCREEN) {
-      setFilmsNumber(MID_MOVIES);
-      setDownloadableMovies(ADD_MID_MOVIES);
-    } else if (sizeWindow < MEDIUM_SCREEN) {
-      setFilmsNumber(MIN_MOVIES);
-      setDownloadableMovies(ADD_MIN_MOVIES);
-    }
-  } */
 
   //Измеряем ресайз окна
   function handleResize() {
@@ -176,12 +199,13 @@ function App() {
           loggedIn={loggedIn}
           component={Profile}
           noFooter={true}
+          exit={exit}
         />
         <Route path="/signin">
-          <Login />
+          <Login authorize={authorize} />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register registration={registration} />
         </Route>
         <Route path="*">
           <NotFound />

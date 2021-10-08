@@ -1,7 +1,11 @@
 import React from "react";
 
-function Profile() {
+function Profile({ exit }) {
   const [save, setSave] = React.useState(false);
+
+  function logout() {
+    exit();
+  }
   return (
     <main className="profile">
       <form className="profile-form">
@@ -42,6 +46,7 @@ function Profile() {
         <button
           type="button"
           className=" button profile-form__button profile-form__button_logOut"
+          onClick={logout}
         >
           Выйти из аккаунта
         </button>

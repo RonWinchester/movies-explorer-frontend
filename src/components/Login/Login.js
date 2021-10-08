@@ -3,8 +3,15 @@ import { loginData, loginInputData } from "../../constants/constants";
 import Form from "../Form/Form";
 import FormInput from "../FormInput/FormInput";
 
-function Login() {
+function Login({authorize}) {
   const { title, name, description, link, linkName } = loginData;
+  const [loginEmailInput, setloginEmailInput] = React.useState("");
+  const [loginPasswordInput, setloginPasswordInput] = React.useState("");
+
+  function handleSubmitLogin () {
+    authorize(loginEmailInput,loginPasswordInput)
+  }
+
   return (
     <div className="login">
       <Form
@@ -14,6 +21,7 @@ function Login() {
         link={link}
         linkName={linkName}
         selector='button-login_margin-top'
+        handleSubmit={handleSubmitLogin}
       >
         <FormInput
           FormInputTitle={loginInputData[0].FormInputTitle}
@@ -22,6 +30,7 @@ function Login() {
           FormInputErrorName={loginInputData[0].FormInputErrorName}
           FormInputType={loginInputData[0].FormInputType}
           FormInputId={loginInputData[0].FormInputId}
+          handleInputValueChange={setloginEmailInput}
         ></FormInput>
         <FormInput
           FormInputTitle={loginInputData[1].FormInputTitle}
@@ -31,6 +40,7 @@ function Login() {
           FormInputType={loginInputData[1].FormInputType}
           FormInputId={loginInputData[1].FormInputId}
           PasswordInput={loginInputData[1].PasswordInput}
+          handleInputValueChange={setloginPasswordInput}
         ></FormInput>
       </Form>
     </div>

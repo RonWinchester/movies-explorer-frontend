@@ -10,17 +10,27 @@ function Form({
   description,
   link,
   linkName,
-  selector
-  /* onSubmit, */
+  selector,
+  handleSubmit,
 }) {
+  function submit(e) {
+    e.preventDefault();
+    handleSubmit();
+  }
+
   return (
-    <form className="form" /* onSubmit={onSubmit} */>
+    <form className="form" onSubmit={submit}>
       <Link to="/" className="form__image">
         <img src={logo} alt="лого"></img>
       </Link>
       <h1 className="form__title">{title}</h1>
       {children}
-      <Button selector={`button-login ${selector}`} name={name} types="submit" />
+      <Button
+        selector={`button-login ${selector}`}
+        name={name}
+        types="submit"
+        handleClick={submit}
+      />
       <p className="form__question">
         {description}
         <Link to={link} className="link form__link">

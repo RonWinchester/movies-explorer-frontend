@@ -3,8 +3,20 @@ import Form from "../Form/Form";
 import { registerData, regiterInputData } from "../../constants/constants";
 import FormInput from "../FormInput/FormInput";
 
-function Register() {
-  const { title, name, description, link, linkName } = registerData;
+function Register({registration}) {
+  const { title, name, description, link, linkName } =
+    registerData;
+  const [nameInput, setNameInput] = React.useState("");
+  const [emailInput, setEmailInput] = React.useState("");
+  const [passwordInput, setPasswordInput] = React.useState("");
+
+ /* function handleInputNameChange() {
+  setNameInput()
+ } */
+
+  function handleSubmit() {
+    registration(nameInput, emailInput, passwordInput);
+  }
 
   return (
     <div className="register">
@@ -14,7 +26,7 @@ function Register() {
         description={description}
         link={link}
         linkName={linkName}
-        /* onSubmit={handleSubmit} */
+        handleSubmit={handleSubmit}
       >
         <FormInput
           FormInputTitle={regiterInputData[0].FormInputTitle}
@@ -23,6 +35,7 @@ function Register() {
           FormInputErrorName={regiterInputData[0].FormInputErrorName}
           FormInputType={regiterInputData[0].FormInputType}
           FormInputId={regiterInputData[0].FormInputId}
+          handleInputValueChange={setNameInput}
         ></FormInput>
         <FormInput
           FormInputTitle={regiterInputData[1].FormInputTitle}
@@ -31,6 +44,7 @@ function Register() {
           FormInputErrorName={regiterInputData[1].FormInputErrorName}
           FormInputType={regiterInputData[1].FormInputType}
           FormInputId={regiterInputData[1].FormInputId}
+          handleInputValueChange={setEmailInput}
         ></FormInput>
         <FormInput
           FormInputTitle={regiterInputData[2].FormInputTitle}
@@ -40,6 +54,7 @@ function Register() {
           FormInputType={regiterInputData[2].FormInputType}
           FormInputId={regiterInputData[2].FormInputId}
           PasswordInput={regiterInputData[2].PasswordInput}
+          handleInputValueChange={setPasswordInput}
         ></FormInput>
       </Form>
     </div>
