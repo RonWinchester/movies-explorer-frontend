@@ -26,7 +26,6 @@ export function handleFilter(moviesList, value) {
 export function handleShortMovies (movies) {
   let result = [];
   movies.forEach(movie => {
-    console.log(movie.duration)
     movie.duration <= SHORT_MOVIES && result.push(movie)
   })
   return result

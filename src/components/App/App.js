@@ -272,19 +272,24 @@ function App() {
   }
 
   const [shortMovie, setShortMovie] = React.useState([])
+  const [shortSaveMovie, setShortSaveMovie] = React.useState([])
 
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function shortFilms () {
-    /* console.log(shortMovie) */
     const films = handleShortMovies(movieCards)
-    console.log(films)
     setShortMovie(films)
+  }
+
+  function shortSaveFilms () {
+    const films = handleShortMovies(saveFilms)
+    setShortSaveMovie(films)
   }
 
   React.useEffect(()=> {
     setMovieCards(shortMovie)
-  },[shortMovie])
+    setSaveFilms(shortSaveMovie)
+  },[shortMovie, shortSaveMovie])
 
   
 
@@ -292,6 +297,11 @@ function App() {
   function notShortFilms() {
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
+  }
+
+  function notShortSaveFilms() {
+    const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
+    saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
   }
 
   
@@ -336,6 +346,9 @@ function App() {
             cards={saveFilms}
             saveMoviePage={saveMoviePage}
             handleRequest={handleFilterSearchMovie}
+
+            shortFilms={shortSaveFilms}
+            notShortFilms={notShortSaveFilms}
           />
           <ProtectedRoute
             path="/profile"
