@@ -1,19 +1,10 @@
 import React from "react";
 import "./SearchForm.css";
 import Checkbox from "../../Checkbox/Checkbox";
-/* import { useLocation } from "react-router-dom"; */
 
-function SearchForm({ handleRequest }) {
+function SearchForm({ handleRequest, shortFilms, notShortFilms }) {
   const [query, setQuery] = React.useState("");
   const [emptyRequest, setEmptyRequest] = React.useState(false);
-
-/*   const location = useLocation();
-  React.useEffect(() => {
-    const querySearch = JSON.parse(localStorage.getItem("query"));
-    querySearch !== null ? setQuery(querySearch) : setQuery('')
-    
-    console.log(querySearch);
-  }, [location.pathname]); */
 
   function handleSearchChange(e) {
     setQuery(e.target.value);
@@ -57,7 +48,7 @@ function SearchForm({ handleRequest }) {
         />
       </fieldset>
       <fieldset className="search-form__fieldset">
-        <Checkbox></Checkbox>
+        <Checkbox shortFilms={shortFilms} notShortFilms={notShortFilms}></Checkbox>
       </fieldset>
     </form>
   );

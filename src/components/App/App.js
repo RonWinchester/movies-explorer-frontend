@@ -12,7 +12,12 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import { getMovies } from "../../utils/MoviesApi";
-import { filterMovies } from "../../utils/filter";
+import {
+  filterMovies,
+  handleIdFilter,
+  handleFilter,
+  handleShortMovies,
+} from "../../utils/filter";
 import { dependentValues } from "../../hooks/resizeWindows";
 import {
   createUser,
@@ -20,13 +25,18 @@ import {
   logout,
   getUserInfo,
   patchUserInfo,
+  savedMovies,
+  getSaveMovies,
+  deleteSavedMovie,
 } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   //Отфильтрованные фильмы по названию
   const [movies, setMovies] = React.useState([]);
+  //Сохраненные фильмы пользователя
+  const [saveFilms, setSaveFilms] = React.useState([]);
   //Записываем данные пользователя
   const [currentUser, setCurrentUser] = React.useState({});
   //Отфильтрованные фильмы по количеству карточек для разных экранов
@@ -34,7 +44,9 @@ function App() {
   //Прелоадер
   const [requestProcessing, setRequestProcessing] = React.useState(false);
 
-  const [like, setLike] = React.useState(false);
+  const [saveMoviePage, setSaveMoviePage] = React.useState(false);
+
+  const [savedFilmsId, setSavedFilmsId] = React.useState([]);
   //Ошибка при загрузке фильмов
   const [filmsError, setFilmsError] = React.useState(false);
 
@@ -51,6 +63,14 @@ function App() {
 
   //Подтягиваем данные
   React.useEffect(() => {
+    getSaveMovies()
+      .then((res) => {
+        localStorage.setItem("savedMovies", JSON.stringify(res));
+      })
+      .catch((err) => {
+        console.log(`ошибка загрузки сохраненных фильмов ${err}`);
+      });
+
     getUserInfo()
       .then((res) => {
         setLoggedIn(true);
@@ -59,7 +79,13 @@ function App() {
       .catch((err) => {
         console.log(`ошибка авторизации ${err}`);
       });
-  }, [loggedIn, history]);
+  }, [loggedIn, location]);
+
+  React.useEffect(() => {
+    history.location.pathname === "/saved-movies"
+      ? setSaveMoviePage(true)
+      : setSaveMoviePage(false);
+  }, [history.location.pathname]);
 
   //Регистрация
   function registration(name, email, password) {
@@ -90,6 +116,7 @@ function App() {
       .then((res) => {
         setLoggedIn(false);
         localStorage.removeItem("movies");
+        localStorage.removeItem("savedMovies");
         history.push("/");
       })
       .catch((err) => {
@@ -113,7 +140,6 @@ function App() {
     setRequestProcessing(true);
     getMovies()
       .then((response) => {
-        /* setMovies(response); */
         const filterFilms = filterMovies(response, query);
         localStorage.setItem("movies", JSON.stringify(filterFilms));
         setMovies(filterFilms);
@@ -135,10 +161,11 @@ function App() {
   //Монтирование фильмов из локального хранилища
   React.useEffect(() => {
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
-    //querySearch = JSON.parse(localStorage.getItem("query"));
     movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
+    const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
+    saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
     handleResize();
-  }, [loggedIn, location.pathname]);
+  }, [loggedIn, location]);
 
   //Слушаем ресайз окна
   React.useEffect(() => {
@@ -173,19 +200,107 @@ function App() {
   }
 
   //Переключатель лайка
-  function handleLikeClick(cardLike) {
+  /*   function handleLikeClick(cardLike) {
     setLike(true);
     movieCards.map((card) =>
       card.id === cardLike.id
         ? (card["like"] = cardLike.like ? false : true)
         : card
     );
+  } */
+
+  //Удаление фильма
+  function deleteMovie(cardLike) {
+    saveFilms.map((card) => {
+      if (card.movieId === cardLike.movieId) {
+        deleteSavedMovie(cardLike._id)
+          .then((res) => {
+            setSaveFilms(handleIdFilter(saveFilms, cardLike._id));
+            localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
+          })
+          .catch((err) => {
+            console.log(`ошибка регистрации ${err}`);
+          });
+      }
+    });
   }
 
-  React.useEffect(() => {
-    setMovieCards(movieCards);
-    setLike(false);
-  }, [like, movieCards]);
+  //Переключатель лайка и сохранение фильмов
+  function handleLikeClick(cardLike) {
+    if (history.location.pathname === "/saved-movies") {
+      /*       saveFilms.map((card) => {
+        if (card.movieId === cardLike.movieId) {
+          deleteSavedMovie(cardLike._id)
+            .then((res) => {
+              setSaveFilms(handleIdFilter(saveFilms, cardLike._id));
+              localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
+            })
+            .catch((err) => {
+              console.log(`ошибка регистрации ${err}`);
+            });
+        }
+      }); */
+      deleteMovie(cardLike);
+    } else {
+      savedMovies(cardLike)
+        .then((res) => {
+          setSaveFilms([...saveFilms, res]);
+          localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
+          setSavedFilmsId([...savedFilmsId, cardLike.movieId]);
+        })
+        .catch((err) => {
+          console.log(`ошибка регистрации ${err}`);
+        });
+
+      // eslint-disable-next-line array-callback-return
+      /*       movieCards.map((card) => {
+        if (card.id === cardLike.id) {
+          savedMovies(cardLike)
+            .then((res) => {
+              setSaveFilms([...saveFilms, res]);
+              localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
+            })
+            .catch((err) => {
+              console.log(`ошибка регистрации ${err}`);
+            });
+        } else {
+          // eslint-disable-next-line no-unused-expressions
+          card;
+        }
+      }); */
+    }
+  }
+
+  const [shortMovie, setShortMovie] = React.useState([])
+
+  //ищем короткометражки
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function shortFilms () {
+    /* console.log(shortMovie) */
+    const films = handleShortMovies(movieCards)
+    console.log(films)
+    setShortMovie(films)
+  }
+
+  React.useEffect(()=> {
+    setMovieCards(shortMovie)
+  },[shortMovie])
+
+  
+
+  //Возвращаем фильмы чекбокс
+  function notShortFilms() {
+    const movieSearch = JSON.parse(localStorage.getItem("movies"));
+    movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
+  }
+
+  
+
+  //Поиск фильмов
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function handleFilterSearchMovie(query) {
+    setSaveFilms(handleFilter(saveFilms, query));
+  }
 
   return (
     <div className="page__container">
@@ -203,17 +318,24 @@ function App() {
             movies={movieCards}
             requestProcessing={requestProcessing}
             handleRequest={handleRequest}
-            like={like}
             handleLikeClick={handleLikeClick}
             filmsError={filmsError}
             uploadingСards={uploadingСards}
             hiddenButton={hiddenButton}
+            savedFilmsId={savedFilmsId}
+
+
+            shortFilms={shortFilms}
+            notShortFilms={notShortFilms}
           />
           <ProtectedRoute
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            cards={movies}
+            handleLikeClick={handleLikeClick}
+            cards={saveFilms}
+            saveMoviePage={saveMoviePage}
+            handleRequest={handleFilterSearchMovie}
           />
           <ProtectedRoute
             path="/profile"

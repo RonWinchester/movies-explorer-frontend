@@ -13,11 +13,16 @@ function Movies(props) {
     filmsError,
     uploadingСards,
     hiddenButton,
+
+    savedFilmsId,
+    shortFilms,
+    notShortFilms
   } = props;
+  
 
   return (
     <main className="alignment">
-      <SearchForm handleRequest={handleRequest}></SearchForm>
+      <SearchForm handleRequest={handleRequest} shortFilms={shortFilms} notShortFilms={notShortFilms}></SearchForm>
       {props.requestProcessing ? (
         <Preloader />
       ) : (
@@ -29,6 +34,7 @@ function Movies(props) {
               like={like}
               uploadingСards={uploadingСards}
               hiddenButton={hiddenButton}
+              savedFilmsId={savedFilmsId}
             ></MoviesCardList>
           ) : (
             <NoFilms

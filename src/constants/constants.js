@@ -153,3 +153,5 @@ export const MIN_MOVIES = 5;
 export const ADD_MAX_MOVIES = 3;
 export const ADD_MID_MOVIES = 2;
 export const ADD_MIN_MOVIES = 5;
+
+export const SHORT_MOVIES = 40;

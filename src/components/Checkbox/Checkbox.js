@@ -1,6 +1,18 @@
 import React from "react";
 
-function Checkbox() {
+function Checkbox({ shortFilms, notShortFilms }) {
+  const [checked, setChecked] = React.useState(false);
+  
+
+  function handleCheckbox() {
+    setChecked(!checked);
+    if (!checked) {
+      shortFilms();
+    } else {
+      notShortFilms();
+    }
+  }
+
   return (
     <div className="checkbox">
       <input
@@ -9,6 +21,7 @@ function Checkbox() {
         type="checkbox"
         name="checkbox"
         id="checkbox"
+        onChange={handleCheckbox}
       />
       <label htmlFor="checkbox" className="checkbox__label">
         Короткометражки

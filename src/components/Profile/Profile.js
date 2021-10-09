@@ -1,15 +1,18 @@
 import React from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useForm";
+import { useHistory } from "react-router-dom";
 
 function Profile({ exit, editProfile }) {
   const [identicalValues, setIdenticalValues] = React.useState(false);
   const userInformation = React.useContext(CurrentUserContext);
 
+  const history = useHistory()
+
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
-  React.useEffect(() => resetForm({}), [resetForm]);
+  React.useEffect(() => resetForm({}), [resetForm, history]);
 
   const { userName, userEmail } = values;
 
@@ -34,6 +37,7 @@ function Profile({ exit, editProfile }) {
 
   React.useEffect(() => {
     comparisonValues();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
   function logout() {

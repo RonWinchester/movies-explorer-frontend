@@ -4,15 +4,19 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import NoFilms from "../NoFilms/NoFilms";
 
 function SavedMovies(props) {
-    const { cards } = props;
-  // Переделал массив, чтобы просто отличались страницы
+  const { cards, handleLikeClick, saveMoviePage, handleRequest } = props;
+
   return (
     <main className="alignment">
-      <SearchForm></SearchForm>
-      {cards ? (
-        <MoviesCardList cards={cards}></MoviesCardList>
+      <SearchForm handleRequest={handleRequest}></SearchForm>
+      {cards.length > 0 ? (
+        <MoviesCardList
+          saveMoviePage={saveMoviePage}
+          handleLikeClick={handleLikeClick}
+          cards={cards}
+        ></MoviesCardList>
       ) : (
-        <NoFilms title='Нет сохраненных фильмов'/>
+        <NoFilms title={cards? "Ничего не найдено" : 'Нет сохраненных фильмов'} />
       )}
     </main>
   );

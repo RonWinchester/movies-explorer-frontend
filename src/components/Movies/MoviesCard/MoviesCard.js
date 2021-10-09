@@ -1,7 +1,16 @@
 import React from "react";
 
 function MoviesCard(props) {
-  const { image, title, time, like, link, handleLikeClick, card } = props;
+  const {
+    image,
+    title,
+    time,
+    saveMoviePage,
+    link,
+    handleLikeClick,
+    card,
+    savedFilmsId,
+  } = props;
 
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins / 60);
@@ -9,10 +18,22 @@ function MoviesCard(props) {
     return `${hours}ч  ${minutes}мин`;
   }
 
-  //console.log(handleLikeClick)
+  let isLiked = null;
+
+  if (savedFilmsId) {
+    function handleIsLiked (movieData, savedFilmsId)  {
+      if (movieData.movieId) {
+        return savedFilmsId.some((e) => e === movieData.movieId);
+      }
+    };
+    isLiked = handleIsLiked(card, savedFilmsId);
+     
+  }
+
+  
 
   function handleLike() {
-    handleLikeClick(card)
+    handleLikeClick(card);
   }
 
   const duration = getTimeFromMins(time);
@@ -26,10 +47,15 @@ function MoviesCard(props) {
           </a>
         </h2>
         <button
-          className={`movies-card__button ${
-            card.like && "movies-card__button_active"
-          } `}
-          type="button" onClick={handleLike}
+          className={
+            saveMoviePage
+              ? `movies-card__button movies-card__button_save`
+              : `movies-card__button ${
+                  isLiked && "movies-card__button_active"
+                } `
+          }
+          type="button"
+          onClick={handleLike}
         ></button>
         <p className="movies-card__time">{duration}</p>
       </div>

@@ -58,6 +58,10 @@
   background-image: url("../../../images/heart-active.svg");
 }
 
+.movies-card__button_save {
+  background-image: url("../../../images/close.svg");
+}
+
 .movies-card__time {
   font-style: normal;
   font-weight: normal;

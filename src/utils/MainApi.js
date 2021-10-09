@@ -50,7 +50,7 @@ export function getUserInfo() {
     method: "GET",
     credentials: "include",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
   }).then((response) => {
@@ -58,13 +58,12 @@ export function getUserInfo() {
   });
 }
 
-
-export function patchUserInfo({name, email}) {
+export function patchUserInfo({ name, email }) {
   return fetch(`${apiMainUrl}users/me`, {
     method: "PATCH",
     credentials: "include",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -75,3 +74,61 @@ export function patchUserInfo({name, email}) {
     return getResponseData(response);
   });
 }
+
+export function savedMovies(movie) {
+  const { country, director, duration, year, description, nameRU, nameEN } =
+    movie;
+  const image = `https://api.nomoreparties.co${movie.image.url}`;
+  const trailer = movie.trailerLink;
+  const thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`;
+  const movieId = movie.id;
+  return fetch(`${apiMainUrl}movies`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailer,
+      nameRU,
+      nameEN,
+      thumbnail,
+      movieId,
+    }),
+  }).then((response) => {
+    return getResponseData(response);
+  });
+}
+
+export function getSaveMovies() {
+  return fetch(`${apiMainUrl}movies`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    return getResponseData(response);
+  });
+}
+
+export const deleteSavedMovie = (movieId) => {
+  return fetch(`${apiMainUrl}movies/${movieId}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    return getResponseData(response);
+  });
+};
