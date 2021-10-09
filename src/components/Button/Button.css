@@ -40,6 +40,11 @@
   margin-top: 179px;
 }
 
+.button_disabled {
+  background: #bbbbbb;
+  cursor: no-drop;
+}
+
 @media screen and (max-width: 992px) {
   .button_more {
     margin-top: 61px;

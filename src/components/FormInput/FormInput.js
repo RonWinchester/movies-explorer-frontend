@@ -2,36 +2,41 @@ import React from "react";
 
 function FormInput({
   FormInputTitle,
-  FormInputName,
+  /* FormInputName, */
   FormInputError,
   FormInputErrorName,
   FormInputType,
   FormInputId,
   PasswordInput,
-  handleInputValueChange
-}) {
-  /* const [inputValue, setInputValue] = React.useState(""); */
+  handleInputValueChange,
 
+  inputValue,
+  inputName,
+}) {
   function handleInputValue(e) {
-    handleInputValueChange(e.target.value);
+    handleInputValueChange(e);
   }
 
   return (
     <>
-      <p className='form-input-title'>{FormInputTitle}</p>
+      <p className="form-input-title">{FormInputTitle}</p>
       <input
         required
         type={FormInputType}
-        minLength="3"
-        maxLength="50"
-        name={FormInputName}
+        minLength={inputName === "password" ? "3" : "2"}
+        maxLength="30"
         onChange={handleInputValue}
-        /* value={inputValue} */
+        value={inputValue}
+        name={inputName}
         id={FormInputId}
         className={`form-input ${PasswordInput}`}
-        autoComplete='none'
+        autoComplete="off"
+        autoCapitalize="off"
+        autoCorrect='off'
       />
-      <span id={FormInputError} className='form-input-error'>{FormInputErrorName}</span>
+      <span id={FormInputError} className="form-input-error">
+        {FormInputErrorName}
+      </span>
     </>
   );
 }

@@ -7,7 +7,7 @@ import {
   ADD_MAX_MOVIES,
   ADD_MID_MOVIES,
   ADD_MIN_MOVIES,
-} from "../../constants/constants";
+} from "../constants/constants";
 
 export function dependentValues(
   sizeWindow,

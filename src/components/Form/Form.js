@@ -12,6 +12,7 @@ function Form({
   linkName,
   selector,
   handleSubmit,
+  isValid
 }) {
   function submit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ function Form({
   }
 
   return (
-    <form className="form" onSubmit={submit}>
+    <form className="form" onSubmit={submit} autoComplete="off">
       <Link to="/" className="form__image">
         <img src={logo} alt="лого"></img>
       </Link>
@@ -30,6 +31,7 @@ function Form({
         name={name}
         types="submit"
         handleClick={submit}
+        isValid={isValid}
       />
       <p className="form__question">
         {description}

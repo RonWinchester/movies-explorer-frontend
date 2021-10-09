@@ -50,9 +50,27 @@ export function getUserInfo() {
     method: "GET",
     credentials: "include",
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
+  }).then((response) => {
+    return getResponseData(response);
+  });
+}
+
+
+export function patchUserInfo({name, email}) {
+  return fetch(`${apiMainUrl}users/me`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+    }),
   }).then((response) => {
     return getResponseData(response);
   });

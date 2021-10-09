@@ -1,6 +1,6 @@
 import React from "react";
 
-function Button({ handleClick, selector, name, types }) {
+function Button({ handleClick, selector, name, types, isValid }) {
   const handleMoreClick = () => {
     handleClick();
   };
@@ -10,7 +10,8 @@ function Button({ handleClick, selector, name, types }) {
       {types === "submit" ? (
         <button
           type={types}
-          className={`button ${selector}`}
+          className={`button ${selector} ${!isValid && 'button_disabled'}`}
+          disabled={!isValid}
         >
           {name}
         </button>

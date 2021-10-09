@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "../Form/Form";
 import { registerData, regiterInputData } from "../../constants/constants";
 import FormInput from "../FormInput/FormInput";
+import { useFormWithValidation } from "../../hooks/useForm";
 
-function Register({registration}) {
-  const { title, name, description, link, linkName } =
-    registerData;
-  const [nameInput, setNameInput] = React.useState("");
-  const [emailInput, setEmailInput] = React.useState("");
-  const [passwordInput, setPasswordInput] = React.useState("");
+function Register({ registration }) {
+  const { title, name, description, link, linkName } = registerData;
 
- /* function handleInputNameChange() {
-  setNameInput()
- } */
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+
+  useEffect(() => resetForm({}), [resetForm]);
+
+  const { userName, userEmail, password } = values;
 
   function handleSubmit() {
-    registration(nameInput, emailInput, passwordInput);
+    registration(userName, userEmail, password);
   }
 
   return (
@@ -27,34 +27,38 @@ function Register({registration}) {
         link={link}
         linkName={linkName}
         handleSubmit={handleSubmit}
+        isValid={isValid}
       >
         <FormInput
           FormInputTitle={regiterInputData[0].FormInputTitle}
-          FormInputName={regiterInputData[0].FormInputName}
           FormInputError={regiterInputData[0].FormInputError}
-          FormInputErrorName={regiterInputData[0].FormInputErrorName}
+          FormInputErrorName={errors.userName}
           FormInputType={regiterInputData[0].FormInputType}
           FormInputId={regiterInputData[0].FormInputId}
-          handleInputValueChange={setNameInput}
+          handleInputValueChange={handleChange}
+          inputValue={userName || ""}
+          inputName="userName"
         ></FormInput>
         <FormInput
           FormInputTitle={regiterInputData[1].FormInputTitle}
-          FormInputName={regiterInputData[1].FormInputName}
           FormInputError={regiterInputData[1].FormInputError}
-          FormInputErrorName={regiterInputData[1].FormInputErrorName}
+          FormInputErrorName={errors.userEmail}
           FormInputType={regiterInputData[1].FormInputType}
           FormInputId={regiterInputData[1].FormInputId}
-          handleInputValueChange={setEmailInput}
+          handleInputValueChange={handleChange}
+          inputValue={userEmail || ""}
+          inputName="userEmail"
         ></FormInput>
         <FormInput
           FormInputTitle={regiterInputData[2].FormInputTitle}
-          FormInputName={regiterInputData[2].FormInputName}
           FormInputError={regiterInputData[2].FormInputError}
-          FormInputErrorName={regiterInputData[2].FormInputErrorName}
+          FormInputErrorName={errors.paswword}
           FormInputType={regiterInputData[2].FormInputType}
           FormInputId={regiterInputData[2].FormInputId}
           PasswordInput={regiterInputData[2].PasswordInput}
-          handleInputValueChange={setPasswordInput}
+          handleInputValueChange={handleChange}
+          inputValue={password || ""}
+          inputName="password"
         ></FormInput>
       </Form>
     </div>

@@ -94,7 +94,7 @@ export const regiterInputData = [
     FormInputName: "input-name",
     FormInputError: "form-name-error",
     FormInputErrorName: "Что-то пошло не так...",
-    FormInputType: "name",
+    FormInputType: "text",
     FormInputId: "register-name",
   },
   {

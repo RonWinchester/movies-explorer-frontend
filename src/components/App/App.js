@@ -13,13 +13,22 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import { getMovies } from "../../utils/MoviesApi";
 import { filterMovies } from "../../utils/filter";
-import { dependentValues } from "../hooks/resizeWindows";
-import { createUser, login, logout, getUserInfo } from "../../utils/MainApi";
+import { dependentValues } from "../../hooks/resizeWindows";
+import {
+  createUser,
+  login,
+  logout,
+  getUserInfo,
+  patchUserInfo,
+} from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   //Отфильтрованные фильмы по названию
   const [movies, setMovies] = React.useState([]);
+  //Записываем данные пользователя
+  const [currentUser, setCurrentUser] = React.useState({});
   //Отфильтрованные фильмы по количеству карточек для разных экранов
   const [movieCards, setMovieCards] = React.useState([]);
   //Прелоадер
@@ -44,8 +53,8 @@ function App() {
   React.useEffect(() => {
     getUserInfo()
       .then((res) => {
-        console.log(res)
         setLoggedIn(true);
+        setCurrentUser(res);
       })
       .catch((err) => {
         console.log(`ошибка авторизации ${err}`);
@@ -80,7 +89,19 @@ function App() {
     logout()
       .then((res) => {
         setLoggedIn(false);
+        localStorage.removeItem("movies");
         history.push("/");
+      })
+      .catch((err) => {
+        console.log(`ошибка регистрации ${err}`);
+      });
+  }
+
+  //Редактирование профиля
+  function editProfile(name, email) {
+    patchUserInfo({ name, email })
+      .then((res) => {
+        setCurrentUser(res);
       })
       .catch((err) => {
         console.log(`ошибка регистрации ${err}`);
@@ -95,7 +116,6 @@ function App() {
         /* setMovies(response); */
         const filterFilms = filterMovies(response, query);
         localStorage.setItem("movies", JSON.stringify(filterFilms));
-        //localStorage.setItem("query", JSON.stringify(query));
         setMovies(filterFilms);
         setRequestProcessing(false);
       })
@@ -169,48 +189,51 @@ function App() {
 
   return (
     <div className="page__container">
-      <Switch>
-        <Route exact path="/">
-          <Header loggedIn={loggedIn}></Header>
-          <Main></Main>
-          <Footer></Footer>
-        </Route>
-        <ProtectedRoute
-          path="/movies"
-          loggedIn={loggedIn}
-          component={Movies}
-          movies={movieCards}
-          requestProcessing={requestProcessing}
-          handleRequest={handleRequest}
-          like={like}
-          handleLikeClick={handleLikeClick}
-          filmsError={filmsError}
-          uploadingСards={uploadingСards}
-          hiddenButton={hiddenButton}
-        />
-        <ProtectedRoute
-          path="/saved-movies"
-          loggedIn={loggedIn}
-          component={SavedMovies}
-          cards={movies}
-        />
-        <ProtectedRoute
-          path="/profile"
-          loggedIn={loggedIn}
-          component={Profile}
-          noFooter={true}
-          exit={exit}
-        />
-        <Route path="/signin">
-          <Login authorize={authorize} />
-        </Route>
-        <Route path="/signup">
-          <Register registration={registration} />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <Route exact path="/">
+            <Header loggedIn={loggedIn}></Header>
+            <Main></Main>
+            <Footer></Footer>
+          </Route>
+          <ProtectedRoute
+            path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            movies={movieCards}
+            requestProcessing={requestProcessing}
+            handleRequest={handleRequest}
+            like={like}
+            handleLikeClick={handleLikeClick}
+            filmsError={filmsError}
+            uploadingСards={uploadingСards}
+            hiddenButton={hiddenButton}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            cards={movies}
+          />
+          <ProtectedRoute
+            path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            noFooter={true}
+            exit={exit}
+            editProfile={editProfile}
+          />
+          <Route path="/signin">
+            <Login authorize={authorize} />
+          </Route>
+          <Route path="/signup">
+            <Register registration={registration} />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </CurrentUserContext.Provider>
     </div>
   );
 }
