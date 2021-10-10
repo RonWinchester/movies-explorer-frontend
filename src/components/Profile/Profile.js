@@ -52,7 +52,6 @@ function Profile({ exit, editProfile }) {
           <input
             required
             className="profile-form__input"
-            /* defaultValue={userInformation.user.name} */
             minLength="3"
             maxLength="50"
             name="userName"
@@ -67,7 +66,6 @@ function Profile({ exit, editProfile }) {
           <input
             required
             className="profile-form__input"
-            /* defaultValue={userInformation.user.email} */
             minLength="3"
             maxLength="50"
             name="userEmail"

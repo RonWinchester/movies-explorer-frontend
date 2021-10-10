@@ -132,6 +132,7 @@ function App() {
     patchUserInfo({ name, email })
       .then((res) => {
         setCurrentUser(res);
+        alert('Успешно')
       })
       .catch((err) => {
         console.log(`ошибка регистрации ${err}`);
