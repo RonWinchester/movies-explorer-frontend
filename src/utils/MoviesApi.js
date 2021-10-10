@@ -1,9 +1,5 @@
 import { apiMoviesUrl, getResponseData } from "../constants/constants";
 
-/* function getResponseData(res) {
-  return res.ok ? res.json() : Promise.reject(`${res.status}`);
-} */
-
 export function getMovies() {
   return fetch(`${apiMoviesUrl}`, {
     method: "GET",

@@ -10,6 +10,7 @@ function MoviesCard(props) {
     handleLikeClick,
     card,
     savedFilmsId,
+    like
   } = props;
 
   function getTimeFromMins(mins) {
@@ -18,24 +19,21 @@ function MoviesCard(props) {
     return `${hours}ч  ${minutes}мин`;
   }
 
-  let isLiked = null;
+/*   let isLiked = null;
 
   if (savedFilmsId) {
-    function handleIsLiked (movieData, savedFilmsId)  {
-      if (movieData.movieId) {
-        return savedFilmsId.some((e) => e === movieData.movieId);
+    function handleIsLiked(movieData, savedFilmsId) {
+      if (movieData.id) {
+        return savedFilmsId.some((e) => e === movieData.id);
       }
-    };
+    }
     isLiked = handleIsLiked(card, savedFilmsId);
-     
-  }
-
-  
+  } */
 
   function handleLike() {
     handleLikeClick(card);
   }
-
+  console.log(like)
   const duration = getTimeFromMins(time);
   return (
     <li className="movies-card">
@@ -51,7 +49,7 @@ function MoviesCard(props) {
             saveMoviePage
               ? `movies-card__button movies-card__button_save`
               : `movies-card__button ${
-                  isLiked && "movies-card__button_active"
+                like && "movies-card__button_active"
                 } `
           }
           type="button"

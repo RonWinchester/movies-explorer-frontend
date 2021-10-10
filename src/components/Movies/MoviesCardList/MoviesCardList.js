@@ -3,7 +3,7 @@ import Button from "../../Button/Button";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
-  const { cards, handleLikeClick, saveMoviePage, uploadingСards, hiddenButton , savedFilmsId} = props;
+  const { cards, handleLikeClick, saveMoviePage, uploadingСards, hiddenButton , savedFilmsId, like} = props;
   return (
     <>
       <ul className="movies">
@@ -23,6 +23,7 @@ function MoviesCardList(props) {
             card={card}
 
             savedFilmsId={savedFilmsId}
+            like={like}
           />
         ))}
       </ul>

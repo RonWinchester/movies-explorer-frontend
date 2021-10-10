@@ -63,14 +63,6 @@ function App() {
 
   //Подтягиваем данные
   React.useEffect(() => {
-    getSaveMovies()
-      .then((res) => {
-        localStorage.setItem("savedMovies", JSON.stringify(res));
-      })
-      .catch((err) => {
-        console.log(`ошибка загрузки сохраненных фильмов ${err}`);
-      });
-
     getUserInfo()
       .then((res) => {
         setLoggedIn(true);
@@ -78,6 +70,17 @@ function App() {
       })
       .catch((err) => {
         console.log(`ошибка авторизации ${err}`);
+      });
+  }, [loggedIn, history]);
+
+  React.useEffect(() => {
+    getSaveMovies()
+      .then((res) => {
+        localStorage.setItem("savedMovies", JSON.stringify(res));
+      })
+      .catch((err) => {
+        setSaveFilms([]);
+        console.log(`ошибка загрузки сохраненных фильмов ${err}`);
       });
   }, [loggedIn, location]);
 
@@ -163,7 +166,7 @@ function App() {
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
     const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
-    saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
+    saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setSaveFilms([]);
     handleResize();
   }, [loggedIn, location]);
 
@@ -199,99 +202,82 @@ function App() {
     }
   }
 
-  //Переключатель лайка
-  /*   function handleLikeClick(cardLike) {
-    setLike(true);
-    movieCards.map((card) =>
-      card.id === cardLike.id
-        ? (card["like"] = cardLike.like ? false : true)
-        : card
-    );
-  } */
-
   //Удаление фильма
   function deleteMovie(cardLike) {
     saveFilms.map((card) => {
       if (card.movieId === cardLike.movieId) {
         deleteSavedMovie(cardLike._id)
           .then((res) => {
-            setSaveFilms(handleIdFilter(saveFilms, cardLike._id));
-            localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
+            const newSaveFilms = handleIdFilter(saveFilms, cardLike._id);
+            setSaveFilms(newSaveFilms);
+            localStorage.setItem("savedMovies", JSON.stringify(newSaveFilms));
+            //Здесь я удаляю из сохраненных id
+/*             if(savedFilmsId.length !==0) {
+              savedFilmsId.splice(savedFilmsId[cardLike.movieId], 1)
+            } */
           })
           .catch((err) => {
-            console.log(`ошибка регистрации ${err}`);
+            console.log(`Ошибка удаления фильма ${err}`);
           });
       }
     });
   }
 
+  //Сохранение фильма
+  function addSaveMovie(cardLike) {
+    savedMovies(cardLike)
+      .then((res) => {
+        const newSaveMovies = [...saveFilms, res];
+        setSaveFilms(newSaveMovies);
+        localStorage.setItem("savedMovies", JSON.stringify(newSaveMovies));
+        setSavedFilmsId([...savedFilmsId, cardLike.id]);
+
+        //Здесь должна быть проверка лайка
+/*         if (savedFilmsId.length !==0) {
+          function handleIsLiked(movieData, savedFilmsId) {
+            if (movieData.id) {
+              return newSaveMovies.some((e) => e === movieData.id);
+            }
+          }
+          isLiked = handleIsLiked(cardLike, savedFilmsId);
+        } */
+      })
+      .catch((err) => {
+        console.log(`ошибка регистрации ${err}`);
+      });
+  }
+
+  let isLiked = false;
+
   //Переключатель лайка и сохранение фильмов
   function handleLikeClick(cardLike) {
     if (history.location.pathname === "/saved-movies") {
-      /*       saveFilms.map((card) => {
-        if (card.movieId === cardLike.movieId) {
-          deleteSavedMovie(cardLike._id)
-            .then((res) => {
-              setSaveFilms(handleIdFilter(saveFilms, cardLike._id));
-              localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
-            })
-            .catch((err) => {
-              console.log(`ошибка регистрации ${err}`);
-            });
-        }
-      }); */
       deleteMovie(cardLike);
     } else {
-      savedMovies(cardLike)
-        .then((res) => {
-          setSaveFilms([...saveFilms, res]);
-          localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
-          setSavedFilmsId([...savedFilmsId, cardLike.movieId]);
-        })
-        .catch((err) => {
-          console.log(`ошибка регистрации ${err}`);
-        });
-
-      // eslint-disable-next-line array-callback-return
-      /*       movieCards.map((card) => {
-        if (card.id === cardLike.id) {
-          savedMovies(cardLike)
-            .then((res) => {
-              setSaveFilms([...saveFilms, res]);
-              localStorage.setItem("savedMovies", JSON.stringify(saveFilms));
-            })
-            .catch((err) => {
-              console.log(`ошибка регистрации ${err}`);
-            });
-        } else {
-          // eslint-disable-next-line no-unused-expressions
-          card;
-        }
-      }); */
+      isLiked ? deleteMovie(cardLike) : addSaveMovie(cardLike);
     }
   }
 
-  const [shortMovie, setShortMovie] = React.useState([])
-  const [shortSaveMovie, setShortSaveMovie] = React.useState([])
+
+  const [shortMovie, setShortMovie] = React.useState([]);
+  const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
 
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  function shortFilms () {
-    const films = handleShortMovies(movieCards)
-    setShortMovie(films)
+  function shortFilms() {
+    const films = handleShortMovies(movieCards);
+    setShortMovie(films);
   }
 
-  function shortSaveFilms () {
-    const films = handleShortMovies(saveFilms)
-    setShortSaveMovie(films)
+  function shortSaveFilms() {
+    const films = handleShortMovies(saveFilms);
+    setShortSaveMovie(films);
   }
 
-  React.useEffect(()=> {
-    setMovieCards(shortMovie)
-    setSaveFilms(shortSaveMovie)
-  },[shortMovie, shortSaveMovie])
-
-  
+  React.useEffect(() => {
+    setMovieCards(shortMovie);
+    setSaveFilms(shortSaveMovie);
+  }, [shortMovie, shortSaveMovie]);
 
   //Возвращаем фильмы чекбокс
   function notShortFilms() {
@@ -303,8 +289,6 @@ function App() {
     const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
     saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
   }
-
-  
 
   //Поиск фильмов
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -333,10 +317,9 @@ function App() {
             uploadingСards={uploadingСards}
             hiddenButton={hiddenButton}
             savedFilmsId={savedFilmsId}
-
-
             shortFilms={shortFilms}
             notShortFilms={notShortFilms}
+            like={isLiked}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -346,7 +329,6 @@ function App() {
             cards={saveFilms}
             saveMoviePage={saveMoviePage}
             handleRequest={handleFilterSearchMovie}
-
             shortFilms={shortSaveFilms}
             notShortFilms={notShortSaveFilms}
           />
