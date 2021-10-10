@@ -33,7 +33,7 @@ function MoviesCard(props) {
   function handleLike() {
     handleLikeClick(card);
   }
-  console.log(like)
+
   const duration = getTimeFromMins(time);
   return (
     <li className="movies-card">

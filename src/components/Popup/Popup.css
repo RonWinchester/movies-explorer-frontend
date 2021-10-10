@@ -1,0 +1,79 @@
+.notification {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: black;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.3s, opacity 0.3s linear;
+}
+
+.notification_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.notification__content {
+  width: 100%;
+  max-width: 430px;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification__text {
+    color: black;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    margin:0;
+}
+
+@media screen and (max-width: 767px) {
+  .notification__content {
+    width: 282px;
+  }
+}
+
+.notification__close-button {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background-image: url('../../images/close.svg');
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  padding: 0;
+}
+
+.notification__close-button:hover {
+  opacity: 0.6;
+}
+
+.notification__close-button:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 767px) {
+  .notification__close-button {
+    width: 26px;
+    height: 26px;
+    right: 0px;
+  }
+}

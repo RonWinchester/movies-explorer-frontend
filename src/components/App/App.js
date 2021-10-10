@@ -31,6 +31,8 @@ import {
 } from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
+import Popup from "../Popup/Popup";
+
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(true);
   //Отфильтрованные фильмы по названию
@@ -61,6 +63,9 @@ function App() {
   const location = useLocation();
   const history = useHistory();
 
+  const [popupOpen, setPopupOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+
   //Подтягиваем данные
   React.useEffect(() => {
     getUserInfo()
@@ -69,18 +74,16 @@ function App() {
         setCurrentUser(res);
       })
       .catch((err) => {
-        console.log(`ошибка авторизации ${err}`);
+        console.log(`Ошибка при загрузке данных профиля ${err}`);
       });
-  }, [loggedIn, history]);
 
-  React.useEffect(() => {
     getSaveMovies()
       .then((res) => {
         localStorage.setItem("savedMovies", JSON.stringify(res));
       })
       .catch((err) => {
         setSaveFilms([]);
-        console.log(`ошибка загрузки сохраненных фильмов ${err}`);
+        console.log(`Ошибка при загрузке сохраненных фильмов ${err}`);
       });
   }, [loggedIn, location]);
 
@@ -95,9 +98,19 @@ function App() {
     createUser({ name, email, password })
       .then((res) => {
         history.push("/signin");
+        setPopupOpen(true);
+        setMessage("Успешно!");
       })
       .catch((err) => {
-        console.log(`ошибка регистрации ${err}`);
+        console.log(`Ошибка регистрации ${err}`);
+        setPopupOpen(true);
+        if (err === "409") {
+          setMessage(`Ошибка! Пользователь с таким email уже существует`);
+        } else if (err === "400") {
+          setMessage(`Ошибка! Введите корректные данные`);
+        } else {
+          setMessage(`Ошибка при регистрации`);
+        }
       });
   }
 
@@ -110,6 +123,14 @@ function App() {
       })
       .catch((err) => {
         console.log(`ошибка регистрации ${err}`);
+        setPopupOpen(true);
+        if (err === "401") {
+          setMessage(`Неправильная почта или пароль`);
+        } else if (err === "400") {
+          setMessage(`Ошибка! Введите корректные данные`);
+        } else {
+          setMessage(`Ошибка при регистрации`);
+        }
       });
   }
 
@@ -123,7 +144,9 @@ function App() {
         history.push("/");
       })
       .catch((err) => {
-        console.log(`ошибка регистрации ${err}`);
+        setPopupOpen(true);
+        setMessage("Ошибка при выходе из системы");
+        console.log(`Ошибка при выходе из системы ${err}`);
       });
   }
 
@@ -132,10 +155,17 @@ function App() {
     patchUserInfo({ name, email })
       .then((res) => {
         setCurrentUser(res);
-        alert('Успешно')
+        setMessage("Данные обновлены");
+        setPopupOpen(true);
       })
       .catch((err) => {
-        console.log(`ошибка регистрации ${err}`);
+        setPopupOpen(true);
+        console.log(`Ошибка регистрации ${err}`);
+        if (err === "400") {
+          setMessage(`Ошибка! Введите корректные данные`);
+        } else {
+          setMessage(`Ошибка при регистрации`);
+        }
       });
   }
 
@@ -213,7 +243,7 @@ function App() {
             setSaveFilms(newSaveFilms);
             localStorage.setItem("savedMovies", JSON.stringify(newSaveFilms));
             //Здесь я удаляю из сохраненных id
-/*             if(savedFilmsId.length !==0) {
+            /*             if(savedFilmsId.length !==0) {
               savedFilmsId.splice(savedFilmsId[cardLike.movieId], 1)
             } */
           })
@@ -234,7 +264,7 @@ function App() {
         setSavedFilmsId([...savedFilmsId, cardLike.id]);
 
         //Здесь должна быть проверка лайка
-/*         if (savedFilmsId.length !==0) {
+        /*         if (savedFilmsId.length !==0) {
           function handleIsLiked(movieData, savedFilmsId) {
             if (movieData.id) {
               return newSaveMovies.some((e) => e === movieData.id);
@@ -258,7 +288,6 @@ function App() {
       isLiked ? deleteMovie(cardLike) : addSaveMovie(cardLike);
     }
   }
-
 
   const [shortMovie, setShortMovie] = React.useState([]);
   const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
@@ -296,6 +325,31 @@ function App() {
   function handleFilterSearchMovie(query) {
     setSaveFilms(handleFilter(saveFilms, query));
   }
+
+  //Popup
+
+  function closeAllPopups() {
+    setPopupOpen(false);
+  }
+
+  function handleOverlayClose(evt) {
+    if (evt.target === evt.currentTarget) {
+      closeAllPopups();
+    }
+  }
+
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener("keyup", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keyup", handleEscClose);
+    };
+  });
 
   return (
     <div className="page__container">
@@ -351,6 +405,13 @@ function App() {
             <NotFound />
           </Route>
         </Switch>
+
+        <Popup
+          handleOverlayClose={handleOverlayClose}
+          isOpen={popupOpen}
+          message={message}
+          onClose={closeAllPopups}
+        ></Popup>
       </CurrentUserContext.Provider>
     </div>
   );
