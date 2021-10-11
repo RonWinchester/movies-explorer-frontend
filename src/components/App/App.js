@@ -251,7 +251,7 @@ function App() {
   React.useEffect(() => {
     setMovieCards(movies.slice(0, filmsNumber));
     setCurrenCount(filmsNumber);
-  }, [movies, filmsNumber]);
+  }, [movies, filmsNumber, ]);
 
   //Прячем кнопку "еще"
   React.useEffect(() => {
@@ -279,7 +279,7 @@ function App() {
       }
     });
     localStorage.setItem("movies", JSON.stringify(elements));
-    /* shortMovie ? shortFilms() : */setMovieCards(elements);
+    /* shortMovie ? shortFilms() : */setMovies(elements);
   }
 
   //Удаление фильма
