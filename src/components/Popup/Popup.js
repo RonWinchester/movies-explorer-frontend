@@ -1,7 +1,6 @@
 import React from "react";
 
 function Popup({ message, isOpen, handleOverlayClose, onClose }) {
-  console.log(isOpen);
 
   return (
     <div

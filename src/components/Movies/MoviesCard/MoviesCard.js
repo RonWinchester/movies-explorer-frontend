@@ -33,7 +33,6 @@ function MoviesCard(props) {
   function handleLike() {
     handleLikeClick(card);
   }
-
   const duration = getTimeFromMins(time);
   return (
     <li className="movies-card">
@@ -49,7 +48,7 @@ function MoviesCard(props) {
             saveMoviePage
               ? `movies-card__button movies-card__button_save`
               : `movies-card__button ${
-                like && "movies-card__button_active"
+                card.like && "movies-card__button_active"
                 } `
           }
           type="button"
