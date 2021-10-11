@@ -9,20 +9,20 @@ function Movies(props) {
     movies,
     handleRequest,
     handleLikeClick,
-    like,
     filmsError,
     uploadingСards,
     hiddenButton,
-
-    savedFilmsId,
     shortFilms,
-    notShortFilms
+    notShortFilms,
   } = props;
-  
 
   return (
     <main className="alignment">
-      <SearchForm handleRequest={handleRequest} shortFilms={shortFilms} notShortFilms={notShortFilms}></SearchForm>
+      <SearchForm
+        handleRequest={handleRequest}
+        shortFilms={shortFilms}
+        notShortFilms={notShortFilms}
+      ></SearchForm>
       {props.requestProcessing ? (
         <Preloader />
       ) : (
@@ -31,10 +31,8 @@ function Movies(props) {
             <MoviesCardList
               cards={movies}
               handleLikeClick={handleLikeClick}
-              like={like}
               uploadingСards={uploadingСards}
               hiddenButton={hiddenButton}
-              savedFilmsId={savedFilmsId}
             ></MoviesCardList>
           ) : (
             <NoFilms

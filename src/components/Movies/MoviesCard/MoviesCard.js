@@ -9,8 +9,6 @@ function MoviesCard(props) {
     link,
     handleLikeClick,
     card,
-    savedFilmsId,
-    like
   } = props;
 
   function getTimeFromMins(mins) {
@@ -18,17 +16,6 @@ function MoviesCard(props) {
     let minutes = mins % 60;
     return `${hours}ч  ${minutes}мин`;
   }
-
-/*   let isLiked = null;
-
-  if (savedFilmsId) {
-    function handleIsLiked(movieData, savedFilmsId) {
-      if (movieData.id) {
-        return savedFilmsId.some((e) => e === movieData.id);
-      }
-    }
-    isLiked = handleIsLiked(card, savedFilmsId);
-  } */
 
   function handleLike() {
     handleLikeClick(card);
