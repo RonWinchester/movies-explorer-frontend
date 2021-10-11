@@ -66,16 +66,3 @@ function Register({ registration }) {
 }
 
 export default Register;
-
-/* {regiterInputData.map((input, index) => (
-  <FormInput
-    FormInputTitle={input.FormInputTitle}
-    FormInputName={input.FormInputName}
-    FormInputError={input.FormInputError}
-    FormInputErrorName={input.FormInputErrorName}
-    FormInputType={input.FormInputType}
-    key={index}
-    onValue={handleInputName}
-    handleSubmit={handleSubmit}
-  ></FormInput>
-))} */

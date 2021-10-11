@@ -113,7 +113,6 @@ function App() {
       newFilms.map((item) => {
         // eslint-disable-next-line array-callback-return
         saveFilmsCard.map((i) => {
-          console.log(item.id, i.movieId)
           if (item.id === i.movieId) {
             return (item["like"] = true);
           }

@@ -1,13 +1,10 @@
 import React from "react";
 
 function Popup({ message, isOpen, handleOverlayClose, onClose }) {
-
   return (
     <div
-      className={`notification ${
-        isOpen ? "notification_opened" : ""
-      }`}
-      /* id={popupId} */ onClick={handleOverlayClose}
+      className={`notification ${isOpen ? "notification_opened" : ""}`}
+      onClick={handleOverlayClose}
     >
       <div className="notification__content">
         <button
