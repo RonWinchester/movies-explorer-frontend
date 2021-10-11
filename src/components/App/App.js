@@ -67,6 +67,7 @@ function App() {
 
   const [shortMovie, setShortMovie] = React.useState([]);
   const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
+  const [shortMovieToggle, setShortMovieToggle] = React.useState(false);
 
   const [isCheckingToken, setIsCheckingToken] = React.useState(true)
 
@@ -251,7 +252,7 @@ function App() {
   React.useEffect(() => {
     setMovieCards(movies.slice(0, filmsNumber));
     setCurrenCount(filmsNumber);
-  }, [movies, filmsNumber, ]);
+  }, [movies, filmsNumber]);
 
   //Прячем кнопку "еще"
   React.useEffect(() => {
@@ -279,13 +280,21 @@ function App() {
       }
     });
     localStorage.setItem("movies", JSON.stringify(elements));
-    /* shortMovie ? shortFilms() : */setMovies(elements);
+    setMovies(elements)
+    /* shortMovieToggle ? setShortMovie(handleShortMovies(elements)) : setMovies(elements); */
+    /* if(shortMovieToggle) {
+      boolean ? setShortMovie(handleShortMovies(elements)) :setMovies(elements)
+    } else {
+      setMovies(elements)
+    } */
   }
 
   //Удаление фильма
   function deleteMovie(cardLike) {
+    console.log(saveFilms,cardLike)
     saveFilms.map((card) => {
       if (card.movieId === cardLike.movieId || card.movieId === cardLike.id) {
+        
         deleteSavedMovie(card._id)
           .then((res) => {
             const newSaveFilms = handleIdFilter(
@@ -335,6 +344,7 @@ function App() {
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function shortFilms() {
+    setShortMovieToggle(true)
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     const films = handleShortMovies(movieSearch);
     setShortMovie(films);
@@ -352,6 +362,7 @@ function App() {
 
   //Возвращаем фильмы чекбокс
   function notShortFilms() {
+    setShortMovieToggle(false)
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
   }
