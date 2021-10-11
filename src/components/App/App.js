@@ -65,6 +65,9 @@ function App() {
   const [popupOpen, setPopupOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
+  const [shortMovie, setShortMovie] = React.useState([]);
+  const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
+
   //Подтягиваем данные
   React.useEffect(() => {
     getUserInfo()
@@ -85,7 +88,9 @@ function App() {
         saveMovieSearch !== null
           ? setSaveFilms(saveMovieSearch)
           : setSaveFilms([]);
-        addLikeActive(movies, saveMovieSearch);
+
+        const movieSearch = JSON.parse(localStorage.getItem("movies"));
+        addLikeActive(movieSearch, saveMovieSearch);
       })
       .catch((err) => {
         setSaveFilms([]);
@@ -271,7 +276,7 @@ function App() {
       }
     });
     localStorage.setItem("movies", JSON.stringify(elements));
-    setMovieCards(elements);
+    /* shortMovie ? shortFilms() : */setMovieCards(elements);
   }
 
   //Удаление фильма
@@ -322,8 +327,7 @@ function App() {
     }
   }
 
-  const [shortMovie, setShortMovie] = React.useState([]);
-  const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
+
 
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
