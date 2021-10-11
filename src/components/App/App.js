@@ -68,12 +68,15 @@ function App() {
   const [shortMovie, setShortMovie] = React.useState([]);
   const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
 
+  const [isCheckingToken, setIsCheckingToken] = React.useState(true)
+
   //Подтягиваем данные
   React.useEffect(() => {
     getUserInfo()
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
+        setIsCheckingToken(false)
       })
       .catch((err) => {
         console.log(`Ошибка при загрузке данных профиля ${err}`);
@@ -332,7 +335,8 @@ function App() {
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function shortFilms() {
-    const films = handleShortMovies(movies);
+    const movieSearch = JSON.parse(localStorage.getItem("movies"));
+    const films = handleShortMovies(movieSearch);
     setShortMovie(films);
   }
 
@@ -410,7 +414,7 @@ function App() {
 
             shortFilms={shortFilms}
             notShortFilms={notShortFilms}
-
+            isCheckingToken={isCheckingToken}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -422,6 +426,8 @@ function App() {
             handleRequest={handleFilterSearchMovie}
             shortFilms={shortSaveFilms}
             notShortFilms={notShortSaveFilms}
+
+            isCheckingToken={isCheckingToken}
           />
           <ProtectedRoute
             path="/profile"
@@ -430,6 +436,8 @@ function App() {
             noFooter={true}
             exit={exit}
             editProfile={editProfile}
+
+            isCheckingToken={isCheckingToken}
           />
           <Route path="/signin">
             <Login authorize={authorize} />
