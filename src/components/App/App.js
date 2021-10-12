@@ -69,7 +69,7 @@ function App() {
   const [shortSaveMovie, setShortSaveMovie] = React.useState([]);
   const [shortMovieToggle, setShortMovieToggle] = React.useState(false);
 
-  const [isCheckingToken, setIsCheckingToken] = React.useState(true)
+  const [isCheckingToken, setIsCheckingToken] = React.useState(true);
 
   //Подтягиваем данные
   React.useEffect(() => {
@@ -77,7 +77,7 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res);
-        setIsCheckingToken(false)
+        setIsCheckingToken(false);
       })
       .catch((err) => {
         console.log(`Ошибка при загрузке данных профиля ${err}`);
@@ -181,6 +181,7 @@ function App() {
         setLoggedIn(false);
         localStorage.removeItem("movies");
         localStorage.removeItem("savedMovies");
+        localStorage.removeItem("shotFilms");
         history.push("/");
       })
       .catch((err) => {
@@ -215,7 +216,6 @@ function App() {
     getMovies()
       .then((response) => {
         const filterFilms = filterMovies(response, query);
-        /* setMovies(filterFilms); */
         setRequestProcessing(false);
         addLikeActive(filterFilms, saveFilms);
       })
@@ -280,36 +280,32 @@ function App() {
       }
     });
     localStorage.setItem("movies", JSON.stringify(elements));
-    //Если просто обновлять этот стейт, то лайки работают, но при нажатии перерисовывает не те карточки
-    /* setMovies(elements) */
-    console.log(shortMovieToggle)
-    //В этом случае лайки ставит, но не снимает даже при отключении сохраненных фильмов. 
-    if(shortMovieToggle) {
+    if (shortMovieToggle) {
       const movieSearch = JSON.parse(localStorage.getItem("shotFilms"));
-      const shortfilmSearch = [...movieSearch]
+      const shortfilmSearch = [...movieSearch];
       shortfilmSearch.map((item) => {
         if (item.id === likeFilms.id || item.id === likeFilms.movieId) {
           return (item["like"] = boolean);
         }
       });
       localStorage.setItem("shotFilms", JSON.stringify(shortfilmSearch));
-      setShortMovie(shortfilmSearch)
+      setShortMovie(shortfilmSearch);
     } else {
-      setMovies(elements)
+      setMovies(elements);
     }
   }
 
   //Удаление фильма
   function deleteMovie(cardLike) {
-    console.log('В функцию удаление попадает')
-    saveFilms.map((card) => {
-      console.log('В мап  попадает')
+    const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
+    const saveFilmsSearch = [...saveMovieSearch];
+
+    saveFilmsSearch.map((card) => {
       if (card.movieId === cardLike.movieId || card.movieId === cardLike.id) {
-        console.log('В иф  попадает')
         deleteSavedMovie(card._id)
           .then((res) => {
             const newSaveFilms = handleIdFilter(
-              saveFilms,
+              saveFilmsSearch,
               cardLike._id || card._id
             );
             setSaveFilms(newSaveFilms);
@@ -327,7 +323,11 @@ function App() {
   function addSaveMovie(cardLike) {
     savedMovies(cardLike)
       .then((res) => {
-        const newSaveMovies = [...saveFilms, res];
+        let saveMovieSearch = [];
+        if (localStorage.getItem("savedMovies") !== null) {
+          saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
+        } /* const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies")); */
+        const newSaveMovies = [...saveMovieSearch, res];
         setSaveFilms(newSaveMovies);
         localStorage.setItem("savedMovies", JSON.stringify(newSaveMovies));
         toggleLike(movies, cardLike, true);
@@ -339,12 +339,10 @@ function App() {
 
   //Работа кнопки лайка
   function handleLikeClick(cardLike) {
-    console.log('Кнопка работет')
     if (history.location.pathname === "/saved-movies") {
       deleteMovie(cardLike);
     } else {
       if (cardLike.like) {
-        console.log('В удаление попадает')
         deleteMovie(cardLike);
       } else {
         addSaveMovie(cardLike);
@@ -352,12 +350,10 @@ function App() {
     }
   }
 
-
-
   //ищем короткометражки
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function shortFilms() {
-    setShortMovieToggle(true)
+    setShortMovieToggle(true);
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     const films = handleShortMovies(movieSearch);
     localStorage.setItem("shotFilms", JSON.stringify(films));
@@ -365,7 +361,7 @@ function App() {
   }
 
   function shortSaveFilms() {
-    setShortMovieToggle(true)
+    setShortMovieToggle(true);
     const films = handleShortMovies(saveFilms);
     setShortSaveMovie(films);
   }
@@ -377,16 +373,20 @@ function App() {
 
   //Возвращаем фильмы чекбокс
   function notShortFilms() {
-    setShortMovieToggle(false)
+    setShortMovieToggle(false);
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     movieSearch !== null ? setMovies(movieSearch) : setMovies([]);
   }
 
   function notShortSaveFilms() {
-    setShortMovieToggle(false)
+    setShortMovieToggle(false);
     const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
     saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
   }
+
+  React.useEffect(() => {
+    setShortMovieToggle(false);
+  }, [location]);
 
   //Поиск фильмов
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -438,7 +438,6 @@ function App() {
             filmsError={filmsError}
             uploadingСards={uploadingСards}
             hiddenButton={hiddenButton}
-
             shortFilms={shortFilms}
             notShortFilms={notShortFilms}
             isCheckingToken={isCheckingToken}
@@ -453,7 +452,6 @@ function App() {
             handleRequest={handleFilterSearchMovie}
             shortFilms={shortSaveFilms}
             notShortFilms={notShortSaveFilms}
-
             isCheckingToken={isCheckingToken}
           />
           <ProtectedRoute
@@ -463,7 +461,6 @@ function App() {
             noFooter={true}
             exit={exit}
             editProfile={editProfile}
-
             isCheckingToken={isCheckingToken}
           />
           <Route path="/signin">
