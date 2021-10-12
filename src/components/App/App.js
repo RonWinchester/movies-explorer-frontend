@@ -280,21 +280,32 @@ function App() {
       }
     });
     localStorage.setItem("movies", JSON.stringify(elements));
-    setMovies(elements)
-    /* shortMovieToggle ? setShortMovie(handleShortMovies(elements)) : setMovies(elements); */
-    /* if(shortMovieToggle) {
-      boolean ? setShortMovie(handleShortMovies(elements)) :setMovies(elements)
+    //Если просто обновлять этот стейт, то лайки работают, но при нажатии перерисовывает не те карточки
+    /* setMovies(elements) */
+    console.log(shortMovieToggle)
+    //В этом случае лайки ставит, но не снимает даже при отключении сохраненных фильмов. 
+    if(shortMovieToggle) {
+      const movieSearch = JSON.parse(localStorage.getItem("shotFilms"));
+      const shortfilmSearch = [...movieSearch]
+      shortfilmSearch.map((item) => {
+        if (item.id === likeFilms.id || item.id === likeFilms.movieId) {
+          return (item["like"] = boolean);
+        }
+      });
+      localStorage.setItem("shotFilms", JSON.stringify(shortfilmSearch));
+      setShortMovie(shortfilmSearch)
     } else {
       setMovies(elements)
-    } */
+    }
   }
 
   //Удаление фильма
   function deleteMovie(cardLike) {
-    console.log(saveFilms,cardLike)
+    console.log('В функцию удаление попадает')
     saveFilms.map((card) => {
+      console.log('В мап  попадает')
       if (card.movieId === cardLike.movieId || card.movieId === cardLike.id) {
-        
+        console.log('В иф  попадает')
         deleteSavedMovie(card._id)
           .then((res) => {
             const newSaveFilms = handleIdFilter(
@@ -326,12 +337,14 @@ function App() {
       });
   }
 
-  //Переключатель лайка и сохранение фильмов
+  //Работа кнопки лайка
   function handleLikeClick(cardLike) {
+    console.log('Кнопка работет')
     if (history.location.pathname === "/saved-movies") {
       deleteMovie(cardLike);
     } else {
       if (cardLike.like) {
+        console.log('В удаление попадает')
         deleteMovie(cardLike);
       } else {
         addSaveMovie(cardLike);
@@ -347,10 +360,12 @@ function App() {
     setShortMovieToggle(true)
     const movieSearch = JSON.parse(localStorage.getItem("movies"));
     const films = handleShortMovies(movieSearch);
+    localStorage.setItem("shotFilms", JSON.stringify(films));
     setShortMovie(films);
   }
 
   function shortSaveFilms() {
+    setShortMovieToggle(true)
     const films = handleShortMovies(saveFilms);
     setShortSaveMovie(films);
   }
@@ -368,6 +383,7 @@ function App() {
   }
 
   function notShortSaveFilms() {
+    setShortMovieToggle(false)
     const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
     saveMovieSearch !== null ? setSaveFilms(saveMovieSearch) : setMovies([]);
   }
