@@ -133,26 +133,7 @@ function App() {
     return;
   }
 
-  //Регистрация
-  function registration(name, email, password) {
-    createUser({ name, email, password })
-      .then((res) => {
-        history.push("/signin");
-        setPopupOpen(true);
-        setMessage("Успешно!");
-      })
-      .catch((err) => {
-        console.log(`Ошибка регистрации ${err}`);
-        setPopupOpen(true);
-        if (err === "409") {
-          setMessage(`Ошибка! Пользователь с таким email уже существует`);
-        } else if (err === "400") {
-          setMessage(`Ошибка! Введите корректные данные`);
-        } else {
-          setMessage(`Ошибка при регистрации`);
-        }
-      });
-  }
+
 
   //Авторизация
   function authorize(email, password) {
@@ -173,6 +154,28 @@ function App() {
         }
       });
   }
+
+    //Регистрация
+    function registration(name, email, password) {
+      createUser({ name, email, password })
+        .then((res) => {
+          /* history.push("/signin");
+          setPopupOpen(true);
+          setMessage("Успешно!") */;
+          authorize(email, password)
+        })
+        .catch((err) => {
+          console.log(`Ошибка регистрации ${err}`);
+          setPopupOpen(true);
+          if (err === "409") {
+            setMessage(`Ошибка! Пользователь с таким email уже существует`);
+          } else if (err === "400") {
+            setMessage(`Ошибка! Введите корректные данные`);
+          } else {
+            setMessage(`Ошибка при регистрации`);
+          }
+        });
+    }
 
   //Выход
   function exit() {
