@@ -23,7 +23,7 @@ function FormInput({
         required
         type={FormInputType}
         minLength={inputName === "password" ? "3" : "2"}
-        maxLength="30"
+        maxLength={inputName === "password" ? "" : "30"}
         onChange={handleInputValue}
         value={inputValue}
         name={inputName}

@@ -317,6 +317,8 @@ function App() {
           })
           .catch((err) => {
             console.log(`Ошибка удаления фильма ${err}`);
+            setPopupOpen(true);
+            setMessage(`Ошибка при удалении фильма`);
           });
       }
     });
@@ -337,6 +339,8 @@ function App() {
       })
       .catch((err) => {
         console.log(`Ошибка при сохранении фильма ${err}`);
+        setPopupOpen(true);
+        setMessage(`Ошибка при сохранении фильма`);
       });
   }
 
