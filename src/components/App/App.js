@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch, useLocation, useHistory } from "react-router-dom";
+import { Route, Switch, useLocation, useHistory, Redirect } from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -81,6 +81,7 @@ function App() {
       })
       .catch((err) => {
         console.log(`Ошибка при загрузке данных профиля ${err}`);
+        setIsCheckingToken(false);
       });
   }, [loggedIn]);
 
@@ -471,13 +472,13 @@ function App() {
             isCheckingToken={isCheckingToken}
           />
           <Route path="/signin">
-            <Login authorize={authorize} />
+            {loggedIn ? <Redirect to="/" /> : <Login authorize={authorize} />}
           </Route>
           <Route path="/signup">
-            <Register registration={registration} />
+            {loggedIn ? <Redirect to="/" /> : <Register registration={registration} />}
           </Route>
           <Route path="*">
-            <NotFound />
+            <NotFound loggedIn={loggedIn} />
           </Route>
         </Switch>
 
