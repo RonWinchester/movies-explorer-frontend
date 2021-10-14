@@ -8,7 +8,7 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
   return (
     <Route>
       {() =>
-      props.isCheckingToken ? <> <Preloader isCheckingToken={props.isCheckingToken}/></>:
+      props.isCheckingToken ? <Preloader isCheckingToken={props.isCheckingToken}/> :
         props.loggedIn ? (
           <div className='protected-route-wrapper'>
             <Header loggedIn={props.loggedIn}></Header>

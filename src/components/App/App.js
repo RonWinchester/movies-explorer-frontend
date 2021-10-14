@@ -1,6 +1,12 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch, useLocation, useHistory, Redirect } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -11,6 +17,7 @@ import NotFound from "../NotFound/NotFound";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Preloader from "../Movies/Preloader/Preloader";
 import { getMovies } from "../../utils/MoviesApi";
 import {
   filterMovies,
@@ -134,8 +141,6 @@ function App() {
     return;
   }
 
-
-
   //Авторизация
   function authorize(email, password) {
     login({ email, password })
@@ -156,27 +161,26 @@ function App() {
       });
   }
 
-    //Регистрация
-    function registration(name, email, password) {
-      createUser({ name, email, password })
-        .then((res) => {
-          /* history.push("/signin");
+  //Регистрация
+  function registration(name, email, password) {
+    createUser({ name, email, password })
+      .then((res) => {
+        /* history.push("/signin");
           setPopupOpen(true);
-          setMessage("Успешно!") */;
-          authorize(email, password)
-        })
-        .catch((err) => {
-          console.log(`Ошибка регистрации ${err}`);
-          setPopupOpen(true);
-          if (err === "409") {
-            setMessage(`Ошибка! Пользователь с таким email уже существует`);
-          } else if (err === "400") {
-            setMessage(`Ошибка! Введите корректные данные`);
-          } else {
-            setMessage(`Ошибка при регистрации`);
-          }
-        });
-    }
+          setMessage("Успешно!") */ authorize(email, password);
+      })
+      .catch((err) => {
+        console.log(`Ошибка регистрации ${err}`);
+        setPopupOpen(true);
+        if (err === "409") {
+          setMessage(`Ошибка! Пользователь с таким email уже существует`);
+        } else if (err === "400") {
+          setMessage(`Ошибка! Введите корректные данные`);
+        } else {
+          setMessage(`Ошибка при регистрации`);
+        }
+      });
+  }
 
   //Выход
   function exit() {
@@ -472,10 +476,22 @@ function App() {
             isCheckingToken={isCheckingToken}
           />
           <Route path="/signin">
-            {loggedIn ? <Redirect to="/" /> : <Login authorize={authorize} />}
+            {isCheckingToken ? (
+              <Preloader isCheckingToken={isCheckingToken} />
+            ) : loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Login authorize={authorize} />
+            )}
           </Route>
           <Route path="/signup">
-            {loggedIn ? <Redirect to="/" /> : <Register registration={registration} />}
+          {isCheckingToken ? (
+              <Preloader isCheckingToken={isCheckingToken} />
+            ) : loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <Register registration={registration} />
+            )}
           </Route>
           <Route path="*">
             <NotFound loggedIn={loggedIn} />
