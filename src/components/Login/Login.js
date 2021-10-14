@@ -12,10 +12,10 @@ function Login({ authorize }) {
 
   useEffect(() => resetForm({}), [resetForm]);
 
-  const { userEmail, password } = values;
+  const { email, password } = values;
 
   function handleSubmitLogin() {
-    authorize(values.userEmail, values.password);
+    authorize(values.email, values.password);
   }
 
   return (
@@ -33,12 +33,14 @@ function Login({ authorize }) {
         <FormInput
           FormInputTitle={loginInputData[0].FormInputTitle}
           FormInputError={loginInputData[0].FormInputError}
-          FormInputErrorName={errors.userEmail}
+          FormInputErrorName={errors.email}
           FormInputType={loginInputData[0].FormInputType}
           FormInputId={loginInputData[0].FormInputId}
           handleInputValueChange={handleChange}
-          inputValue={userEmail || ""}
-          inputName="userEmail"
+          inputValue={email || ""}
+          inputName="email"
+
+          PatternInput={loginInputData[0].PatternInput}
         ></FormInput>
         <FormInput
           FormInputTitle={loginInputData[1].FormInputTitle}

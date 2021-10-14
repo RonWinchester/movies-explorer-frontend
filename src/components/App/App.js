@@ -165,9 +165,7 @@ function App() {
   function registration(name, email, password) {
     createUser({ name, email, password })
       .then((res) => {
-        /* history.push("/signin");
-          setPopupOpen(true);
-          setMessage("Успешно!") */ authorize(email, password);
+        authorize(email, password);
       })
       .catch((err) => {
         console.log(`Ошибка регистрации ${err}`);
@@ -336,7 +334,7 @@ function App() {
         let saveMovieSearch = [];
         if (localStorage.getItem("savedMovies") !== null) {
           saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies"));
-        } /* const saveMovieSearch = JSON.parse(localStorage.getItem("savedMovies")); */
+        }
         const newSaveMovies = [...saveMovieSearch, res];
         setSaveFilms(newSaveMovies);
         localStorage.setItem("savedMovies", JSON.stringify(newSaveMovies));
@@ -485,7 +483,7 @@ function App() {
             )}
           </Route>
           <Route path="/signup">
-          {isCheckingToken ? (
+            {isCheckingToken ? (
               <Preloader isCheckingToken={isCheckingToken} />
             ) : loggedIn ? (
               <Redirect to="/" />

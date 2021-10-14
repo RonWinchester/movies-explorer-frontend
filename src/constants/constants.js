@@ -73,7 +73,7 @@ export const portfolioUrls = [
 ];
 
 export const registerData = {
-  name: "Зарегистрироваться",
+  buttonName: "Зарегистрироваться",
   title: "Добро пожаловать!",
   description: "Уже зарегистрированы?",
   link: "/signin",
@@ -96,6 +96,8 @@ export const regiterInputData = [
     FormInputErrorName: "Что-то пошло не так...",
     FormInputType: "text",
     FormInputId: "register-name",
+
+    PatternInput: "[a-zA-Z0-9\\sа-яА-Я\\-]{2,30}",
   },
   {
     FormInputTitle: "E-mail",
@@ -104,6 +106,8 @@ export const regiterInputData = [
     FormInputErrorName: "Пользователь с таким e-mail уже существует",
     FormInputType: "email",
     FormInputId: "register-email",
+
+    PatternInput: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
   },
   {
     FormInputTitle: "Пароль",
@@ -112,7 +116,9 @@ export const regiterInputData = [
     FormInputErrorName: "Что-то пошло не так...",
     FormInputType: "password",
     FormInputId: "register-password",
-    PasswordInput:'form-input_red'
+    PasswordInput: "form-input_red",
+
+    PatternInput: "[a-zA-Z0-9а-яА-Я\\-!@#$%^&*]{3,}",
   },
 ];
 
@@ -124,6 +130,7 @@ export const loginInputData = [
     FormInputErrorName: "Пользователь с таким e-mail уже существует",
     FormInputType: "email",
     FormInputId: "register-email",
+    PatternInput: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
   },
   {
     FormInputTitle: "Пароль",
@@ -132,12 +139,18 @@ export const loginInputData = [
     FormInputErrorName: "Что-то пошло не так...",
     FormInputType: "password",
     FormInputId: "register-password",
-    PasswordInput:'form-input_red'
+    PasswordInput: "form-input_red",
   },
 ];
 
-export const apiMoviesUrl = 'https://api.nomoreparties.co/beatfilm-movies';
-export const apiMainUrl ='https://api.polugrudov.nomoredomains.club/';
+export const profileInputData = [
+  {
+    PatternInput: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+  },
+];
+
+export const apiMoviesUrl = "https://api.nomoreparties.co/beatfilm-movies";
+export const apiMainUrl = "https://api.polugrudov.nomoredomains.club/";
 
 export function getResponseData(res) {
   return res.ok ? res.json() : Promise.reject(`${res.status}`);

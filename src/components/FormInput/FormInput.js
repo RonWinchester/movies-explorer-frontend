@@ -8,7 +8,7 @@ function FormInput({
   FormInputId,
   PasswordInput,
   handleInputValueChange,
-
+  PatternInput,
   inputValue,
   inputName,
 }) {
@@ -32,6 +32,8 @@ function FormInput({
         autoComplete="off"
         autoCapitalize="off"
         autoCorrect='off'
+
+        pattern={PatternInput}
       />
       <span id={FormInputError} className="form-input-error">
         {FormInputErrorName}

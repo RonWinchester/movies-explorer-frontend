@@ -2,6 +2,7 @@ import React from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useForm";
 import { useHistory } from "react-router-dom";
+import { profileInputData} from '../../constants/constants'
 
 function Profile({ exit, editProfile }) {
   const [identicalValues, setIdenticalValues] = React.useState(false);
@@ -14,11 +15,11 @@ function Profile({ exit, editProfile }) {
 
   React.useEffect(() => resetForm({}), [resetForm, history]);
 
-  const { userName, userEmail } = values;
+  const { userName, email } = values;
 
   function patchProfile(e) {
     e.preventDefault();
-    editProfile(userName, userEmail)
+    editProfile(userName, email)
     setIdenticalValues(false)
   }
 
@@ -26,8 +27,8 @@ function Profile({ exit, editProfile }) {
     if (
       userInformation.user.name !== userName &&
       userName !== undefined &&
-      userInformation.user.email !== userEmail &&
-      userEmail !== undefined
+      userInformation.user.email !== email &&
+      email !== undefined
     ) {
       setIdenticalValues(true);
     } else {
@@ -68,14 +69,15 @@ function Profile({ exit, editProfile }) {
             className="profile-form__input"
             minLength="3"
             maxLength="50"
-            name="userEmail"
+            name="email"
             type="email"
-            value={userEmail || userInformation.user.email}
+            value={email || userInformation.user.email}
             placeholder={userInformation.user.email}
             onChange={handleChange}
+            pattern={profileInputData[0].PatternInput}
           />
         </label>
-        <span className="profile-form__error">{errors.userEmail}</span>
+        <span className="profile-form__error">{errors.email}</span>
         {!identicalValues || !isValid ? <span className="profile-form__error profile-form__error_values">
           Введите новые значения имени и email
         </span> : ''}
