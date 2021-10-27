@@ -25,6 +25,7 @@
 
 .about-me-avatar__image {
   object-fit: cover;
+  width: 100%;
 }
 
 .about-me-information__title {
