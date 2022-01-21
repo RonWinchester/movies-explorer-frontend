@@ -150,7 +150,7 @@ export const profileInputData = [
 ];
 
 export const apiMoviesUrl = "https://api.nomoreparties.co/beatfilm-movies";
-export const apiMainUrl = "https://api.polugrudov.nomoredomains.club/";
+export const apiMainUrl = "https://api.polugrudov.ru/";
 
 export function getResponseData(res) {
   return res.ok ? res.json() : Promise.reject(`${res.status}`);
