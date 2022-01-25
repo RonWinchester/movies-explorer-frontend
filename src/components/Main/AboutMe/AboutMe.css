@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 66px;
+  align-items: center;
 }
 
 .about-me-information {
@@ -26,6 +27,7 @@
 .about-me-avatar__image {
   object-fit: cover;
   width: 100%;
+  border-radius: 10px;
 }
 
 .about-me-information__title {
@@ -48,6 +50,7 @@
 .about-me-information__description {
   font-style: normal;
   font-weight: normal;
+  text-align: justify;
   font-size: 14px;
   line-height: 22px;
   margin: 0;

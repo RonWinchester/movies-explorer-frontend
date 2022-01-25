@@ -67,7 +67,7 @@ export const portfolioUrls = [
   },
   {
     name: "Одностраничное приложение",
-    link: "https://polugrudov.students.nomoredomains.club/",
+    link: "https://mesto.polugrudov.ru/",
     target: "_blank",
   },
 ];
