@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* a0617425@polugrudov.ru:/home/a0617425/domains/polugrudov.ru/public_html"
+    "deploy": "scp -r ./build/* root@194.226.121.189:/var/www/movies-frontend"
   },
   "eslintConfig": {
     "extends": [
